@@ -1,0 +1,1134 @@
+{
+  "building": {
+    "id": "05d928dd-e426-4d58-87f8-c8181019331b",
+    "name": "apartment name",
+    "type": "apartment type",
+    "address": {
+      "fullAddress": "NA",
+      "roadAddress": "NA"
+    },
+    "geolocation": {
+      "latitude": 0.0,
+      "longitude": 0.0
+    },
+    "size": 128.3,
+    "floors": [
+      "1F"
+    ],
+    "images": [
+      {
+        "floor": "1F",
+        "width": 600,
+        "height": 800
+      }
+    ]
+  },
+  "floors": [
+    {
+      "name": "1F",
+      "scalingFactor": 0.0,
+      "rooms": [
+        {
+          "id": "4d63c599-147d-40ba-90a6-e7c0d4d89aca",
+          "plane": {
+            "id": "9fe0cfe2-1c64-4075-ad2e-e551713ad1ba",
+            "coordinates": [
+              [0.0, 0.0, 213.0],
+              [0.0, 0.0, 131.0],
+              [82.0, 0.0, 131.0],
+              [82.0, 0.0, 213.0]
+            ]
+          },
+          "walls": [
+            {
+              "id": "742648fd-70ed-43f6-8f31-a5ffc1dd1934",
+              "coordinates": [
+                [0.0, 38.0, 213.0],
+                [0.0, 38.0, 131.0]
+              ]
+            },
+            {
+              "id": "4faed4ac-b7d8-41d1-b28b-ce058b512eb2",
+              "coordinates": [
+                [0.0, 38.0, 131.0],
+                [52.0, 38.0, 131.0]
+              ]
+            },
+            {
+              "id": "72b43479-118f-4044-a76b-ae4047f2c9e2",
+              "coordinates": [
+                [82.0, 38.0, 213.0],
+                [0.0, 38.0, 213.0]
+              ]
+            },
+            {
+              "id": "f2366c15-52de-4242-b42b-89e268164468",
+              "coordinates": [
+                [82.0, 38.0, 131.0],
+                [82.0, 38.0, 185.0]
+              ]
+            },
+            {
+              "id": "a4017dd4-c661-4814-9938-acb0ed89c8c8",
+              "coordinates": [
+                [52.0, 38.0, 131.0],
+                [82.0, 38.0, 131.0]
+              ]
+            },
+            {
+              "id": "7ce071ab-3e09-4f3c-9c98-e1c7013b9bb2",
+              "coordinates": [
+                [82.0, 38.0, 185.0],
+                [82.0, 38.0, 213.0]
+              ]
+            }
+          ],
+          "properties": {
+            "category": "BEDROOM",
+            "visible": true,
+            "color": "EDDFCB",
+            "wallColor": "",
+            "texture": "cdd030ac-f5db-47bc-b1c8-522916f639f3",
+            "wallTexture": "00000000-0000-0000-0000-000000000000",
+            "area": 0.0
+          }
+        },
+        {
+          "id": "a84bacf1-9f8b-4d90-89ec-afe35fe27453",
+          "plane": {
+            "id": "afe9e807-6f37-40ed-91b0-48c5baca1480",
+            "coordinates": [
+              [81.0, 0.0, 0.0],
+              [160.0, 0.0, 0.0],
+              [160.0, 0.0, 88.0],
+              [81.0, 0.0, 88.0]
+            ]
+          },
+          "walls": [
+            {
+              "id": "4343de46-061d-45ed-96d6-107167932437",
+              "coordinates": [
+                [81.0, 38.0, 0.0],
+                [160.0, 38.0, 0.0]
+              ]
+            },
+            {
+              "id": "1e593f19-b90f-4209-aea6-002b39d67402",
+              "coordinates": [
+                [160.0, 38.0, 0.0],
+                [160.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "3a46d344-b906-4e0b-9451-069849762553",
+              "coordinates": [
+                [160.0, 38.0, 88.0],
+                [81.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "6457f628-206d-4384-9263-eac3088a1dfb",
+              "coordinates": [
+                [81.0, 38.0, 88.0],
+                [81.0, 38.0, 0.0]
+              ]
+            }
+          ],
+          "properties": {
+            "category": "KITCHEN",
+            "visible": true,
+            "color": "C3B197",
+            "wallColor": "",
+            "texture": "0755b33c-6b32-4e03-86dd-e2d81c071046",
+            "wallTexture": "00000000-0000-0000-0000-000000000000",
+            "area": 0.0
+          }
+        },
+        {
+          "id": "eb147e5f-6588-4565-a81a-a6497c26e36d",
+          "plane": {
+            "id": "1bafe91f-eb28-4fda-9023-2c15ad96b099",
+            "coordinates": [
+              [81.0, 0.0, 0.0],
+              [81.0, 0.0, 88.0],
+              [0.0, 0.0, 88.0],
+              [0.0, 0.0, 0.0]
+            ]
+          },
+          "walls": [
+            {
+              "id": "6f8e400c-85d5-4f34-a3c3-35f407dbcc8f",
+              "coordinates": [
+                [81.0, 38.0, 0.0],
+                [81.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "38708f52-c772-4bb0-9146-09eace7a16c6",
+              "coordinates": [
+                [81.0, 38.0, 88.0],
+                [52.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "f263fd30-7c47-4b0f-8c05-cccf50000f5e",
+              "coordinates": [
+                [0.0, 38.0, 0.0],
+                [81.0, 38.0, 0.0]
+              ]
+            },
+            {
+              "id": "bffa34ef-a21b-4bc8-9ba4-dd9377b96cd0",
+              "coordinates": [
+                [0.0, 38.0, 88.0],
+                [0.0, 38.0, 0.0]
+              ]
+            },
+            {
+              "id": "df216520-1dd6-47e5-8781-f54909a4be5a",
+              "coordinates": [
+                [52.0, 38.0, 88.0],
+                [0.0, 38.0, 88.0]
+              ]
+            }
+          ],
+          "properties": {
+            "category": "BEDROOM",
+            "visible": true,
+            "color": "EDDFCB",
+            "wallColor": "",
+            "texture": "0755b33c-6b32-4e03-86dd-e2d81c071046",
+            "wallTexture": "00000000-0000-0000-0000-000000000000",
+            "area": 0.0
+          }
+        },
+        {
+          "id": "cbc55502-ab9e-4655-8296-fff55bbefbdf",
+          "plane": {
+            "id": "30516b3c-621d-469d-855c-913b74a32aff",
+            "coordinates": [
+              [160.0, 0.0, 0.0],
+              [241.0, 0.0, 0.0],
+              [241.0, 0.0, 88.0],
+              [160.0, 0.0, 88.0]
+            ]
+          },
+          "walls": [
+            {
+              "id": "1fa578e7-eeff-4f0a-ab5e-7cce37907a38",
+              "coordinates": [
+                [160.0, 38.0, 0.0],
+                [241.0, 38.0, 0.0]
+              ]
+            },
+            {
+              "id": "92ca54c0-0892-4439-87f7-b08659ea7a62",
+              "coordinates": [
+                [160.0, 38.0, 88.0],
+                [160.0, 38.0, 0.0]
+              ]
+            },
+            {
+              "id": "10a9ad7a-06a0-47a6-852a-49f29e30c1b3",
+              "coordinates": [
+                [241.0, 38.0, 0.0],
+                [241.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "4b766a12-b5d8-4942-a34e-adc38f961335",
+              "coordinates": [
+                [241.0, 38.0, 88.0],
+                [189.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "e39f3434-3659-47e4-92a5-1c9dc3337d40",
+              "coordinates": [
+                [189.0, 38.0, 88.0],
+                [160.0, 38.0, 88.0]
+              ]
+            }
+          ],
+          "properties": {
+            "category": "BEDROOM",
+            "visible": true,
+            "color": "EDDFCB",
+            "wallColor": "",
+            "texture": "0755b33c-6b32-4e03-86dd-e2d81c071046",
+            "wallTexture": "00000000-0000-0000-0000-000000000000",
+            "area": 0.0
+          }
+        },
+        {
+          "id": "31605fce-d799-42e6-9430-0d3c59cea06f",
+          "plane": {
+            "id": "2165199e-4ed3-4cf8-a1c5-2fa5cc70f3ca",
+            "coordinates": [
+              [241.0, 0.0, 88.0],
+              [241.0, 0.0, 131.0],
+              [189.0, 0.0, 131.0],
+              [189.0, 0.0, 88.0]
+            ]
+          },
+          "walls": [
+            {
+              "id": "2c81813f-70f0-4e94-80f3-40250538225c",
+              "coordinates": [
+                [241.0, 38.0, 88.0],
+                [241.0, 38.0, 131.0]
+              ]
+            },
+            {
+              "id": "1dfda28d-4883-42ce-8b20-44c7733feac7",
+              "coordinates": [
+                [241.0, 38.0, 131.0],
+                [189.0, 38.0, 131.0]
+              ]
+            },
+            {
+              "id": "228730b1-8e12-4d01-84ec-d3ea2ec95749",
+              "coordinates": [
+                [189.0, 38.0, 131.0],
+                [189.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "327fc05e-aca5-4959-bd7a-5bc6c90094aa",
+              "coordinates": [
+                [189.0, 38.0, 88.0],
+                [241.0, 38.0, 88.0]
+              ]
+            }
+          ],
+          "properties": {
+            "category": "BATHROOM",
+            "visible": true,
+            "color": "DFDFDF",
+            "wallColor": "",
+            "texture": "62d0df23-d2fb-4d23-b8de-5b34f9cbb35a",
+            "wallTexture": "00000000-0000-0000-0000-000000000000",
+            "area": 0.0
+          }
+        },
+        {
+          "id": "52c44f3b-0fbd-4ae9-b84f-81437c2e0f9a",
+          "plane": {
+            "id": "b1dbccba-0079-4f02-abb1-ef76d9281313",
+            "coordinates": [
+              [0.0, 0.0, 88.0],
+              [52.0, 0.0, 88.0],
+              [52.0, 0.0, 131.0],
+              [0.0, 0.0, 131.0]
+            ]
+          },
+          "walls": [
+            {
+              "id": "e55af19b-dc0b-4d0c-8ad2-fcadfee212c0",
+              "coordinates": [
+                [0.0, 38.0, 131.0],
+                [0.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "642f63ae-615f-4341-8b55-40f0e5f9bc34",
+              "coordinates": [
+                [0.0, 38.0, 88.0],
+                [52.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "821845d9-d796-4de8-b771-401f58f7decf",
+              "coordinates": [
+                [52.0, 38.0, 88.0],
+                [52.0, 38.0, 131.0]
+              ]
+            },
+            {
+              "id": "a9e6a815-a80b-4063-8974-388c0eab634f",
+              "coordinates": [
+                [52.0, 38.0, 131.0],
+                [0.0, 38.0, 131.0]
+              ]
+            }
+          ],
+          "properties": {
+            "category": "BATHROOM",
+            "visible": true,
+            "color": "DFDFDF",
+            "wallColor": "",
+            "texture": "62d0df23-d2fb-4d23-b8de-5b34f9cbb35a",
+            "wallTexture": "00000000-0000-0000-0000-000000000000",
+            "area": 0.0
+          }
+        },
+        {
+          "id": "82de7006-8e69-4f31-afd1-bc9f59f313be",
+          "plane": {
+            "id": "96c881e8-5fa6-405e-885c-7f6ec1fbb29e",
+            "coordinates": [
+              [82.0, 0.0, 185.0],
+              [82.0, 0.0, 131.0],
+              [52.0, 0.0, 131.0],
+              [52.0, 0.0, 88.0],
+              [189.0, 0.0, 88.0],
+              [189.0, 0.0, 131.0],
+              [241.0, 0.0, 131.0],
+              [241.0, 0.0, 213.0],
+              [149.0, 0.0, 213.0],
+              [149.0, 0.0, 185.0]
+            ]
+          },
+          "walls": [
+            {
+              "id": "28389cba-a353-4b88-ada4-5b5380ca694a",
+              "coordinates": [
+                [82.0, 38.0, 131.0],
+                [52.0, 38.0, 131.0]
+              ]
+            },
+            {
+              "id": "657a8a32-2a65-4019-984d-866a402ec474",
+              "coordinates": [
+                [160.0, 38.0, 88.0],
+                [189.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "c8939f3b-19e6-42c8-948f-ac9858c880ab",
+              "coordinates": [
+                [81.0, 38.0, 88.0],
+                [160.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "8bd55a2d-8b5c-4d5c-a19a-600cb50bf55f",
+              "coordinates": [
+                [241.0, 38.0, 131.0],
+                [241.0, 38.0, 213.0]
+              ]
+            },
+            {
+              "id": "146927e7-f2c4-40dc-b978-643be768e020",
+              "coordinates": [
+                [189.0, 38.0, 131.0],
+                [241.0, 38.0, 131.0]
+              ]
+            },
+            {
+              "id": "dfab6c9c-0417-43b7-adeb-43dd6dbb8a79",
+              "coordinates": [
+                [189.0, 38.0, 88.0],
+                [189.0, 38.0, 131.0]
+              ]
+            },
+            {
+              "id": "d8df334f-0d6c-4292-9032-b51a1167094b",
+              "coordinates": [
+                [52.0, 38.0, 88.0],
+                [81.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "29518c01-47a2-4d60-be33-3d27435ae0cd",
+              "coordinates": [
+                [52.0, 38.0, 131.0],
+                [52.0, 38.0, 88.0]
+              ]
+            },
+            {
+              "id": "719da662-6316-4792-b2b6-0162319b5a13",
+              "coordinates": [
+                [82.0, 38.0, 185.0],
+                [82.0, 38.0, 131.0]
+              ]
+            },
+            {
+              "id": "2158ee8e-3717-4a70-9da0-370144580817",
+              "coordinates": [
+                [241.0, 38.0, 213.0],
+                [149.0, 38.0, 213.0]
+              ]
+            },
+            {
+              "id": "8c3f5324-de14-4e04-94bd-f483baaf51b0",
+              "coordinates": [
+                [149.0, 0.0, 213.0],
+                [149.0, 0.0, 185.0]
+              ]
+            },
+            {
+              "id": "1e571f1c-76ee-4973-b5e7-79177cc6f8b0",
+              "coordinates": [
+                [149.0, 0.0, 185.0],
+                [82.0, 0.0, 185.0]
+              ]
+            }
+          ],
+          "properties": {
+            "category": "KITCHEN",
+            "visible": true,
+            "color": "C3B197",
+            "wallColor": "",
+            "texture": "0755b33c-6b32-4e03-86dd-e2d81c071046",
+            "wallTexture": "00000000-0000-0000-0000-000000000000",
+            "area": 0.0
+          }
+        },
+        {
+          "id": "951f6caf-d26c-41ef-8d92-9dbf76b2940a",
+          "plane": {
+            "id": "e9afe349-1fa4-430c-a0c9-4fac4eb6e7f7",
+            "coordinates": [
+              [82.0, 0.0, 213.0],
+              [82.0, 0.0, 185.0],
+              [149.0, 0.0, 185.0],
+              [149.0, 0.0, 213.0]
+            ]
+          },
+          "walls": [
+            {
+              "id": "f1f403bc-11ab-45a9-824f-9c9fe2eb7efc",
+              "coordinates": [
+                [82.0, 38.0, 213.0],
+                [82.0, 38.0, 185.0]
+              ]
+            },
+            {
+              "id": "a9759633-d97e-48c0-88e3-37cbf15c0b17",
+              "coordinates": [
+                [82.0, 0.0, 185.0],
+                [149.0, 0.0, 185.0]
+              ]
+            },
+            {
+              "id": "02c9bf6d-09eb-47f7-85fd-48cb67ba9d02",
+              "coordinates": [
+                [149.0, 38.0, 213.0],
+                [82.0, 38.0, 213.0]
+              ]
+            },
+            {
+              "id": "e921eff7-926b-48b9-bb2c-8346403f02ee",
+              "coordinates": [
+                [149.0, 0.0, 185.0],
+                [149.0, 0.0, 213.0]
+              ]
+            }
+          ],
+          "properties": {
+            "category": "CLOSET",
+            "visible": true,
+            "color": "C7C8C7",
+            "wallColor": "",
+            "texture": "00000000-0000-0000-0000-000000000000",
+            "wallTexture": "00000000-0000-0000-0000-000000000000",
+            "area": 0.0
+          }
+        }
+      ],
+      "openings": [
+        {
+          "id": "d1a6f47f-8c7a-4b01-950b-9a179fa444a5",
+          "coordinates": [
+            [53.3, 38.0, 131.0],
+            [77.5, 38.0, 131.0]
+          ],
+          "properties": {
+            "category": "DOOR",
+            "groups": ["a4017dd4-c661-4814-9938-acb0ed89c8c8", "28389cba-a353-4b88-ada4-5b5380ca694a"],
+            "visible": true
+          }
+        },
+        {
+          "id": "062fe895-31ec-4580-a631-ed2f732cd915",
+          "coordinates": [
+            [156.0, 38.0, 88.0],
+            [131.8, 38.0, 88.0]
+          ],
+          "properties": {
+            "category": "DOOR",
+            "groups": ["3a46d344-b906-4e0b-9451-069849762553", "c8939f3b-19e6-42c8-948f-ac9858c880ab"],
+            "visible": true
+          }
+        },
+        {
+          "id": "acc2a534-5949-465c-b3ac-34795f0d149c",
+          "coordinates": [
+            [77.5, 38.0, 88.0],
+            [53.3, 38.0, 88.0]
+          ],
+          "properties": {
+            "category": "DOOR",
+            "groups": ["38708f52-c772-4bb0-9146-09eace7a16c6", "d8df334f-0d6c-4292-9032-b51a1167094b"],
+            "visible": true
+          }
+        },
+        {
+          "id": "2ba7533b-08fa-43fd-a187-f68686319bd7",
+          "coordinates": [
+            [237.3, 38.0, 88.0],
+            [217.8, 38.0, 88.0]
+          ],
+          "properties": {
+            "category": "DOOR",
+            "groups": ["4b766a12-b5d8-4942-a34e-adc38f961335", "327fc05e-aca5-4959-bd7a-5bc6c90094aa"],
+            "visible": true
+          }
+        },
+        {
+          "id": "4f78f237-25d8-423d-a660-7353eab92260",
+          "coordinates": [
+            [187.5, 38.0, 88.0],
+            [163.3, 38.0, 88.0]
+          ],
+          "properties": {
+            "category": "DOOR",
+            "groups": ["e39f3434-3659-47e4-92a5-1c9dc3337d40", "657a8a32-2a65-4019-984d-866a402ec474"],
+            "visible": true
+          }
+        },
+        {
+          "id": "62bbc203-c97e-4208-99f9-e559d552726d",
+          "coordinates": [
+            [52.0, 38.0, 109.3],
+            [52.0, 38.0, 128.5]
+          ],
+          "properties": {
+            "category": "DOOR",
+            "groups": ["821845d9-d796-4de8-b771-401f58f7decf", "29518c01-47a2-4d60-be33-3d27435ae0cd"],
+            "visible": true
+          }
+        },
+        {
+          "id": "ca700ae4-9c44-4484-8ef8-2d224667a7de",
+          "coordinates": [
+            [130.0, 38.0, 213.0],
+            [100.0, 38.0, 213.0]
+          ],
+          "properties": {
+            "category": "DOOR",
+            "groups": ["02c9bf6d-09eb-47f7-85fd-48cb67ba9d02"],
+            "visible": true
+          }
+        },
+        {
+          "id": "6cffc75c-30e6-4099-b7a4-ba0b798aff06",
+          "coordinates": [
+            [0.0, 38.0, 184.0],
+            [0.0, 38.0, 161.3]
+          ],
+          "properties": {
+            "category": "WINDOW",
+            "groups": ["742648fd-70ed-43f6-8f31-a5ffc1dd1934"],
+            "visible": true
+          }
+        },
+        {
+          "id": "f4e10864-79f4-40fe-ab90-c613ea3f4ce6",
+          "coordinates": [
+            [19.0, 38.0, 131.0],
+            [35.0, 38.0, 131.0]
+          ],
+          "properties": {
+            "category": "WINDOW",
+            "groups": ["4faed4ac-b7d8-41d1-b28b-ce058b512eb2", "a9e6a815-a80b-4063-8974-388c0eab634f"],
+            "visible": true
+          }
+        },
+        {
+          "id": "3c2f5426-34b3-466a-8ea6-699668e7a8b2",
+          "coordinates": [
+            [119.3, 38.0, 88.0],
+            [96.5, 38.0, 88.0]
+          ],
+          "properties": {
+            "category": "WINDOW",
+            "groups": ["3a46d344-b906-4e0b-9451-069849762553", "c8939f3b-19e6-42c8-948f-ac9858c880ab"],
+            "visible": true
+          }
+        },
+        {
+          "id": "3f685bc3-5376-4107-ab12-1e05c57aca69",
+          "coordinates": [
+            [0.0, 38.0, 55.3],
+            [0.0, 38.0, 32.5]
+          ],
+          "properties": {
+            "category": "WINDOW",
+            "groups": ["bffa34ef-a21b-4bc8-9ba4-dd9377b96cd0"],
+            "visible": true
+          }
+        },
+        {
+          "id": "928b40dd-af62-46a8-b2c3-403eee215737",
+          "coordinates": [
+            [241.0, 38.0, 102.8],
+            [241.0, 38.0, 117.8]
+          ],
+          "properties": {
+            "category": "WINDOW",
+            "groups": ["2c81813f-70f0-4e94-80f3-40250538225c"],
+            "visible": true
+          }
+        },
+        {
+          "id": "81b4ba18-25de-484d-91c0-f470486f1f60",
+          "coordinates": [
+            [0.0, 38.0, 118.0],
+            [0.0, 38.0, 102.8]
+          ],
+          "properties": {
+            "category": "WINDOW",
+            "groups": ["e55af19b-dc0b-4d0c-8ad2-fcadfee212c0"],
+            "visible": true
+          }
+        },
+        {
+          "id": "756535b4-2b6f-4f72-af6d-4173d2e505dd",
+          "coordinates": [
+            [241.0, 38.0, 161.5],
+            [241.0, 38.0, 183.8]
+          ],
+          "properties": {
+            "category": "WINDOW",
+            "groups": ["8bd55a2d-8b5c-4d5c-a19a-600cb50bf55f"],
+            "visible": true
+          }
+        },
+        {
+          "id": "e7b62cf1-f9f9-497b-85c2-a8bc85f0b3b7",
+          "coordinates": [
+            [241.0, 38.0, 47.8],
+            [241.0, 38.0, 32.8]
+          ],
+          "properties": {
+            "category": "WINDOW",
+            "groups": ["10a9ad7a-06a0-47a6-852a-49f29e30c1b3"],
+            "visible": true
+          }
+        }
+      ],
+      "objects": [
+        {
+          "id": "c7dfc04f-a295-4cd3-aaf6-4375186302c8",
+          "coordinates": {
+            "position": [137.0, 0.0, 124.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 0.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0015",
+            "visible": true
+          }
+        },
+        {
+          "id": "ae78ea28-1d88-44f0-b1b1-a80be35086c6",
+          "coordinates": {
+            "position": [191.0, 0.0, 35.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 0.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0002",
+            "visible": true
+          }
+        },
+        {
+          "id": "b4e6737f-3da5-4b62-9755-cb2f93b9fefd",
+          "coordinates": {
+            "position": [36.0, 0.0, 190.5],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0002",
+            "visible": true
+          }
+        },
+        {
+          "id": "22c3c42a-1cb1-4805-81ab-384c3488ec99",
+          "coordinates": {
+            "position": [181.0, 0.0, 113.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 0.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0023",
+            "visible": true
+          }
+        },
+        {
+          "id": "86aae747-855c-4d2d-adba-9a30b172bfe8",
+          "coordinates": {
+            "position": [206.0, 0.0, 141.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 90.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0042",
+            "visible": true
+          }
+        },
+        {
+          "id": "5cec288e-0d43-4a3e-8eaa-37d1625a41d5",
+          "coordinates": {
+            "position": [166.0, 0.0, 96.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 0.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0030",
+            "visible": true
+          }
+        },
+        {
+          "id": "2a1189b0-4934-4627-90d7-ba5624819ea0",
+          "coordinates": {
+            "position": [30.0, 0.0, 96.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 0.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0030",
+            "visible": true
+          }
+        },
+        {
+          "id": "efce723d-eb6a-4e15-97c6-8e3a164f2a66",
+          "coordinates": {
+            "position": [10.0, 0.0, 106.5],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0042",
+            "visible": true
+          }
+        },
+        {
+          "id": "26153d12-3fc1-4981-852a-9056fa262f0b",
+          "coordinates": {
+            "position": [30.0, 0.0, 125.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0023",
+            "visible": true
+          }
+        },
+        {
+          "id": "00c01011-a3a6-42f2-8b9e-c66902e4a30c",
+          "coordinates": {
+            "position": [231.0, 0.0, 203.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0039",
+            "visible": true
+          }
+        },
+        {
+          "id": "dad2879f-9c03-4ee8-9ff6-0faffcd6b950",
+          "coordinates": {
+            "position": [72.0, 0.0, 121.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0039",
+            "visible": true
+          }
+        },
+        {
+          "id": "557434a3-c2fe-4ca7-835f-790144676d6f",
+          "coordinates": {
+            "position": [159.0, 0.0, 175.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0043",
+            "visible": true
+          }
+        },
+        {
+          "id": "0da52442-ab39-4892-8b67-b1d5de999545",
+          "coordinates": {
+            "position": [231.0, 0.0, 10.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0031",
+            "visible": true
+          }
+        },
+        {
+          "id": "57617889-f3f4-4076-b741-64bbc3266595",
+          "coordinates": {
+            "position": [101.0, 0.0, 8.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 0.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0038",
+            "visible": true
+          }
+        },
+        {
+          "id": "4c87efa1-a871-49ec-9bb2-d7701127f52c",
+          "coordinates": {
+            "position": [149.0, 0.0, 8.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 0.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0038",
+            "visible": true
+          }
+        },
+        {
+          "id": "6efb46fc-8a1d-4658-810d-87c580837cdb",
+          "coordinates": {
+            "position": [113.0, 0.0, 8.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 0.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0038",
+            "visible": true
+          }
+        },
+        {
+          "id": "99095add-e758-4550-866c-b54f6c7fa978",
+          "coordinates": {
+            "position": [120.0, 0.0, 49.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0010",
+            "visible": true
+          }
+        },
+        {
+          "id": "0897088a-5e47-4c53-8512-8e83d6a52052",
+          "coordinates": {
+            "position": [129.0, 0.0, 8.0],
+            "size": [0.3, 0.0, 0.0],
+            "rotation": [0.0, 0.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0012",
+            "visible": true
+          }
+        },
+        {
+          "id": "ee90b409-6725-40e4-8224-2795f23db317",
+          "coordinates": {
+            "position": [137.0, 0.0, 147.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0020",
+            "visible": true
+          }
+        },
+        {
+          "id": "71e709a7-850e-44d8-8aa4-168ec3564742",
+          "coordinates": {
+            "position": [105.0, 0.0, 150.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 270.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0014",
+            "visible": true
+          }
+        },
+        {
+          "id": "a3814f1c-66de-40a9-9b59-b001cb8f53fb",
+          "coordinates": {
+            "position": [169.0, 0.0, 142.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 90.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0013",
+            "visible": true
+          }
+        },
+        {
+          "id": "0e2ad6bd-95b3-4841-84dc-9e91ad86cbd5",
+          "coordinates": {
+            "position": [207.0, 0.0, 181.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0017",
+            "visible": true
+          }
+        },
+        {
+          "id": "d6bb5c75-9f29-4ff4-a45a-c25e81828d9d",
+          "coordinates": {
+            "position": [59.0, 0.0, 155.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "CHRISTMAS2024-0003",
+            "visible": true
+          }
+        },
+        {
+          "id": "c9f5c6c9-d83e-41b5-aeab-13289116f41c",
+          "coordinates": {
+            "position": [30.0, 0.0, 163.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "CHRISTMAS2024-0002",
+            "visible": true
+          }
+        },
+        {
+          "id": "32ad8382-c555-45a7-9fe2-3fc3bc8d8d80",
+          "coordinates": {
+            "position": [92.0, 0.0, 121.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "CHRISTMAS2024-0004",
+            "visible": true
+          }
+        },
+        {
+          "id": "4d2cf48f-98b6-4378-b070-52f0f6431ebe",
+          "coordinates": {
+            "position": [142.0, 0.0, 31.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0039",
+            "visible": true
+          }
+        },
+        {
+          "id": "a75cec65-deb9-4e50-9ffd-2d150356af0f",
+          "coordinates": {
+            "position": [95.0, 0.0, 32.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0043",
+            "visible": true
+          }
+        },
+        {
+          "id": "d0faeab0-fd5f-43bb-86ff-3806a23c35c0",
+          "coordinates": {
+            "position": [150.0, 0.0, 48.0],
+            "size": [0.4, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "0032",
+            "visible": true
+          }
+        },
+        {
+          "id": "9712ef93-2656-409b-983d-5353ebfbabba",
+          "coordinates": {
+            "position": [150.0, 40.0, 78.0],
+            "size": [0.0, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "9999",
+            "visible": true
+          }
+        },
+        {
+          "id": "d88313a6-764a-48ca-b27a-96c59b441fbe",
+          "coordinates": {
+            "position": [71.0, 40.0, 78.0],
+            "size": [0.0, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "9999",
+            "visible": true
+          }
+        },
+        {
+          "id": "69d518ce-3dba-410a-a266-b5223813cb52",
+          "coordinates": {
+            "position": [231.0, 40.0, 78.0],
+            "size": [0.0, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "9999",
+            "visible": true
+          }
+        },
+        {
+          "id": "1de2229d-77b4-401d-954b-c471a381cdd2",
+          "coordinates": {
+            "position": [42.0, 40.0, 121.0],
+            "size": [0.0, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "9999",
+            "visible": true
+          }
+        },
+        {
+          "id": "8ab8a650-9d31-427a-8ce6-14cf87b28636",
+          "coordinates": {
+            "position": [231.0, 40.0, 121.0],
+            "size": [0.0, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "9999",
+            "visible": true
+          }
+        },
+        {
+          "id": "cc5076f2-8a04-4849-852c-a6481ed1e8e8",
+          "coordinates": {
+            "position": [10.0, 0.0, 141.0],
+            "size": [0.0, 0.0, 0.0],
+            "rotation": [0.0, 180.0, 0.0]
+          },
+          "properties": {
+            "resourceId": "9999",
+            "visible": true
+          }
+        }
+      ],
+      "properties": {
+        "color": "",
+        "wallColor": "",
+        "texture": "00000000-0000-0000-0000-000000000000",
+        "wallTexture": "00000000-0000-0000-0000-000000000000",
+        "scale": 100,
+        "generationMethod": "UNKNOWN",
+        "theme": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  ],
+  "id": "05d928dd-e426-4d58-87f8-c8181019331b"
+}

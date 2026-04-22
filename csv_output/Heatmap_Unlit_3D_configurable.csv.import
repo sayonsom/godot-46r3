@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://2yakhhmvkmbr"
+
+[deps]
+
+files=["res://csv_output/Heatmap_Unlit_3D_configurable.Type.translation", "res://csv_output/Heatmap_Unlit_3D_configurable.Range/Hint.translation", "res://csv_output/Heatmap_Unlit_3D_configurable.Default Value.translation", "res://csv_output/Heatmap_Unlit_3D_configurable.Description.translation"]
+
+source_file="res://csv_output/Heatmap_Unlit_3D_configurable.csv"
+dest_files=["res://csv_output/Heatmap_Unlit_3D_configurable.Type.translation", "res://csv_output/Heatmap_Unlit_3D_configurable.Range/Hint.translation", "res://csv_output/Heatmap_Unlit_3D_configurable.Default Value.translation", "res://csv_output/Heatmap_Unlit_3D_configurable.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

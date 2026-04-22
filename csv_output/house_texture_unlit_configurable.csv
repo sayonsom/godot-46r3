@@ -1,0 +1,5 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_BaseColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Base color
+_BaseMap,sampler2D,hint_albedo,-,Base texture map
+_Tiling,vec2,-,"vec2(1.0, 1.0)",Texture tiling
+_Offset,vec2,-,"vec2(0.0, 0.0)",Texture offset

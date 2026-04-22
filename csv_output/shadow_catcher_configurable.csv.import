@@ -1,0 +1,16 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bx7ho0qxy4i6c"
+
+[deps]
+
+source_file="res://csv_output/shadow_catcher_configurable.csv"
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

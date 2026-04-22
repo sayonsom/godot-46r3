@@ -1,0 +1,3 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 0.0)",Primary color
+_Color2,vec4,hint_color,"vec4(0.6509434, 0.6509434, 0.6509434, 0.0)",Secondary color

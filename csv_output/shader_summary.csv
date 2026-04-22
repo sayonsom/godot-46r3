@@ -1,0 +1,34 @@
+Shader Name,Shader Type,Render Mode,Configurable Parameters Count,Fixed Parameters Count,Usage Context
+SpriteOpaque,shader_type spatial,"unshaded, cull_disabled, depth_draw_always",6,2,N/A
+WallDepthShader,shader_type spatial,"depth_test_disabled, depth_draw_opaque, cull_disabled, unshaded",4,2,N/A
+Simple Lit Overlay,shader_type spatial,"blend_mix, depth_test_disabled, depth_draw_never, cull_disabled, unshaded",13,2,N/A
+SpriteOpaqueIcon,shader_type spatial,"unshaded, cull_disabled, depth_draw_always",7,2,N/A
+SpriteColorShadow,shader_type canvas_item,blend_mix,2,2,N/A
+Heatmap H Base Stenciled,shader_type spatial,"blend_mix, depth_draw_never, cull_back, unshaded",10,2,N/A
+Heatmap H Cover Stenciled,shader_type spatial,"blend_mix, depth_draw_never, cull_back, unshaded",18,2,N/A
+Heatmap Unlit 3D,shader_type spatial,"blend_mix, depth_draw_never, cull_back, unshaded",18,3,N/A
+Heatmap Unlit 3D H Base,shader_type spatial,"blend_mix, depth_draw_never, cull_back, unshaded",10,3,N/A
+Heatmap Unlit 3D H Cover,shader_type spatial,"blend_mix, depth_draw_never, cull_back, unshaded",18,3,N/A
+Heatmap Base,shader_type spatial,"blend_mix, depth_draw_never, cull_back, unshaded",20,3,N/A
+TMP_SDF-Mobile,shader_type spatial,"unshaded, cull_disabled, depth_draw_opaque, blend_mix",35,2,N/A
+TMP_SDF-Mobile-2-Pass-Outline,shader_type spatial,"unshaded, cull_disabled, depth_draw_never, blend_mix",35,2,N/A
+TMP_SDF-Mobile-2-Pass-Face,shader_type spatial,"unshaded, cull_disabled, depth_draw_opaque, blend_mix",35,2,N/A
+two_tone_color_unlit,shader_type canvas_item,blend_mix,2,2,N/A
+two_tone_transparent_color_unlit,shader_type canvas_item,blend_mix,3,2,N/A
+two_tone_color_unlit_opacity,shader_type canvas_item,blend_mix,2,2,N/A
+house_texture_lit,shader_type spatial,"cull_disabled, diffuse_burley, specular_schlick_ggx",5,2,N/A
+house_texture_unlit,shader_type canvas_item,blend_mix,4,2,N/A
+shadow_catcher,shader_type spatial,"unshaded, cull_disabled, depth_draw_opaque",0,2,N/A
+triplanar_lit,shader_type spatial,"blend_mix, cull_disabled, depth_draw_opaque",15,2,N/A
+divider,shader_type canvas_item,blend_mix,6,2,N/A
+edit_mode_grid,shader_type canvas_item,blend_mix,12,2,N/A
+sprite_color,shader_type canvas_item,blend_mix,2,2,N/A
+wall_render_outer,shader_type spatial,"blend_mix, depth_draw_never, cull_back, unshaded",6,2,N/A
+character_lit,shader_type spatial,"blend_mix, depth_draw_always, cull_disabled, diffuse_burley, specular_schlick_ggx",27,2,N/A
+two_layered_lit,shader_type canvas_item,blend_mix,8,2,N/A
+block_3d,shader_type canvas_item,blend_mix,10,2,N/A
+device_progress,shader_type canvas_item,blend_mix,6,2,N/A
+sprite_color_zwrite,shader_type canvas_item,"blend_mix, depth_draw_always",2,2,N/A
+sprite_icon_unlit,shader_type canvas_item,blend_mix,3,2,N/A
+heatmap_box_stenciled,shader_type spatial,"blend_mix, depth_draw_never, cull_back, unshaded",20,3,N/A
+wall_render_outer_side,shader_type spatial,"blend_mix, depth_draw_never, cull_back, unshaded",6,2,N/A

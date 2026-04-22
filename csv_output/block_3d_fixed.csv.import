@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://d2c7tyvl6hvul"
+
+[deps]
+
+files=["res://csv_output/block_3d_fixed.Value.translation", "res://csv_output/block_3d_fixed.Description.translation"]
+
+source_file="res://csv_output/block_3d_fixed.csv"
+dest_files=["res://csv_output/block_3d_fixed.Value.translation", "res://csv_output/block_3d_fixed.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

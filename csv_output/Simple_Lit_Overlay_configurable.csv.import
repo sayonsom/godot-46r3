@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://ci8776quq4udw"
+
+[deps]
+
+files=["res://csv_output/Simple_Lit_Overlay_configurable.Type.translation", "res://csv_output/Simple_Lit_Overlay_configurable.Range/Hint.translation", "res://csv_output/Simple_Lit_Overlay_configurable.Default Value.translation", "res://csv_output/Simple_Lit_Overlay_configurable.Description.translation"]
+
+source_file="res://csv_output/Simple_Lit_Overlay_configurable.csv"
+dest_files=["res://csv_output/Simple_Lit_Overlay_configurable.Type.translation", "res://csv_output/Simple_Lit_Overlay_configurable.Range/Hint.translation", "res://csv_output/Simple_Lit_Overlay_configurable.Default Value.translation", "res://csv_output/Simple_Lit_Overlay_configurable.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

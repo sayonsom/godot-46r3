@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bw8fu0y6peyil"
+
+[deps]
+
+files=["res://csv_output/edit_mode_grid_configurable.Type.translation", "res://csv_output/edit_mode_grid_configurable.Range/Hint.translation", "res://csv_output/edit_mode_grid_configurable.Default Value.translation", "res://csv_output/edit_mode_grid_configurable.Description.translation"]
+
+source_file="res://csv_output/edit_mode_grid_configurable.csv"
+dest_files=["res://csv_output/edit_mode_grid_configurable.Type.translation", "res://csv_output/edit_mode_grid_configurable.Range/Hint.translation", "res://csv_output/edit_mode_grid_configurable.Default Value.translation", "res://csv_output/edit_mode_grid_configurable.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

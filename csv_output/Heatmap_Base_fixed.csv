@@ -1,0 +1,4 @@
+Parameter Name,Value,Description
+shader_type,spatial,3D shader type
+render_mode,"blend_mix, depth_draw_never, cull_back, unshaded",Rendering modes
+HeatmapAttractor struct,"position: vec3, radius: float, intensity: float",Attractor data structure

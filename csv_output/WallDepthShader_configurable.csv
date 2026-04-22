@@ -1,0 +1,5 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+topColor,vec3,-,"vec3(1.0, 0.0, 0.0)",Top surface color
+side1Color,vec3,-,"vec3(0.0, 0.0, 0.0)",Side color 1
+side2Color,vec3,-,"vec3(0.0, 1.0, 0.0)",Side color 2
+lightColor,vec3,-,"vec3(0.0, 0.0, 1.0)",Light color for diffuse

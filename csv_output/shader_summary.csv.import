@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bwi3a1vgwq61q"
+
+[deps]
+
+files=["res://csv_output/shader_summary.Shader Type.translation", "res://csv_output/shader_summary.Render Mode.translation", "res://csv_output/shader_summary.Configurable Parameters Count.translation", "res://csv_output/shader_summary.Fixed Parameters Count.translation", "res://csv_output/shader_summary.Usage Context.translation"]
+
+source_file="res://csv_output/shader_summary.csv"
+dest_files=["res://csv_output/shader_summary.Shader Type.translation", "res://csv_output/shader_summary.Render Mode.translation", "res://csv_output/shader_summary.Configurable Parameters Count.translation", "res://csv_output/shader_summary.Fixed Parameters Count.translation", "res://csv_output/shader_summary.Usage Context.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

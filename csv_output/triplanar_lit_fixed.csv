@@ -1,0 +1,3 @@
+Parameter Name,Value,Description
+shader_type,spatial,3D shader type
+render_mode,"blend_mix, cull_disabled, depth_draw_opaque",Rendering modes

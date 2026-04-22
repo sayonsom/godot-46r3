@@ -1,0 +1,11 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_BaseColor,vec4,hint_color,"vec4(0.643, 0.643, 0.643, 1.0)",Base color tint
+_BaseMap,sampler2D,hint_albedo,-,Base texture
+_LambertAmount,float,"hint_range(0.0, 1.0)",0.5,Lambert lighting amount
+_ColorBrightness,float,"hint_range(0.0, 2.0)",1.0,Color brightness
+_Color2Darkness,float,"hint_range(0.0, 1.0)",0.0,Secondary color darkness
+_AlbedoBrightness,float,"hint_range(0.0, 1.0)",0.0,Albedo brightness
+_GhostLight,bool,hint_toggle,false,Enable ghost lighting effect
+_GhostLightSpeed,float,"hint_range(0.0, 1.0)",1.0,Ghost light animation speed
+_GhostLightColor,vec4,hint_color,"vec4(0.25, 0.5056, 1.0, 0.0)",Ghost light color
+_Alpha,float,-,1.0,Alpha multiplier

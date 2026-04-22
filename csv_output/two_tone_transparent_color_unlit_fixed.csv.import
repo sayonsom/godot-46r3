@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://box2xiq3wcsib"
+
+[deps]
+
+files=["res://csv_output/two_tone_transparent_color_unlit_fixed.Value.translation", "res://csv_output/two_tone_transparent_color_unlit_fixed.Description.translation"]
+
+source_file="res://csv_output/two_tone_transparent_color_unlit_fixed.csv"
+dest_files=["res://csv_output/two_tone_transparent_color_unlit_fixed.Value.translation", "res://csv_output/two_tone_transparent_color_unlit_fixed.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

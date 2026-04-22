@@ -1,0 +1,3 @@
+Parameter Name,Value,Description
+shader_type,canvas_item,2D shader type
+render_mode,"blend_mix, depth_draw_always",Rendering modes

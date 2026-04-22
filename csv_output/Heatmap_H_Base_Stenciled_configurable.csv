@@ -1,0 +1,11 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_GradientTexture,sampler2D,hint_black_albedo,white texture,Gradient color texture
+_BaseIntensity,float,"hint_range(0.0, 1.0)",0.0,Base intensity value
+_DitheringRadius,float,"hint_range(0.0, 1.0)",0.5,Dithering radius
+_CutRange,vec2,-,"vec2(0.0, 0.2)",Intensity cut range
+_BaseRadius,float,-,0.0,Base radius
+_BaseOpacity,float,"hint_range(0.0, 1.0)",1.0,Base opacity
+_BlendColorRatio,float,"hint_range(0.0, 1.0)",0.0,Color blend ratio
+_BlendOverlaySceneOpacity,float,"hint_range(0.0, 1.0)",0.0,Scene overlay opacity
+_BlendOverlaySceneRatio,float,"hint_range(0.0, 1.0)",0.0,Scene blend ratio
+_BlendOverlayWhiteOpacity,float,"hint_range(0.0, 1.0)",0.0,White overlay opacity

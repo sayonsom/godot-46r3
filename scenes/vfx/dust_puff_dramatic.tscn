@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/vfx/dust_puff.gd" id="1"]
+
+[node name="DustPuffDramatic" type="Node3D"]
+script = ExtResource("1")
+piece_count = 28
+radius = 0.58
+duration = 1.10
+color = Color(0.96, 0.96, 0.96, 0.4)
+drift = 0.42
+rise = 0.52
+piece_size = 0.24
+flight_boost = 0.88

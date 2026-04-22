@@ -1,0 +1,7 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 0.0)",Primary color
+_Color2,vec4,hint_color,"vec4(0.6509434, 0.6509434, 0.6509434, 0.0)",Secondary color
+_AddBrightness,float,"hint_range(0.0, 1.0)",0.0,Brightness adjustment
+_GhostLight,bool,hint_toggle,false,Enable ghost lighting effect
+_GhostLightSpeed,float,"hint_range(0.0, 1.0)",3.0,Ghost light animation speed
+_GhostLightColor,vec4,hint_color,"vec4(0.25, 0.5056235, 1.0, 0.0)",Ghost light color

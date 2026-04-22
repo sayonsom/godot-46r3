@@ -1,0 +1,19 @@
+extends RefCounted
+
+const EMBEDDED_PNGS := {
+	"res://SmartThingsIcons/Light_1.png": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAABwlBMVEUAAAD//wD/zCL/2Cf/0ST/0SP/0iP/0SL/0iP/zyBXV1dYWFhZWVlZWVn/0SL/0SH/0SL/1SP/0SNZWVlZWVn/0CL/1SL/0SL/0SP/0iL/0SL/0SP/zBr/0CP/0SL/0SL/0SP/0SJZWVn/0SL/2yT/0CL/0CL/qgD/0SNZWVkAAABVVVVYWFhZWVlZWVmymDr/0yP/0SL/0SL/0SL/0SL/zyL/xhz/0CLApDj/0Rf/0iL/yCT/0iL/0SNYWFj/0SL/0SJZWVlaWlqAgIBXV1dZWVlVVVVbW1tZWVlZWVmulz3/0SL/0SL/0iL/0yL/ziT/0iL/0yP/0SP/0CL/0iH/0SP/0SL/zyL/0SL/0CL/0SP/0SL/0SP/0iP/0SJZWVlZWVlVVVVZWVlZWVn/0iH/0SL/0iD/0SL/v0D/0SH/0SJZWVlZWVlZWVlVVVVZWVlZWVn/0iH/0SL/0CL/0iD/0CH/0iP/0SL/0SP/0SH/0CP/0SH/0SH/zh3/0Cb/0SL/0CL/0SL/0SD/zyL/0SJZWVlZWVlZWVlZWVlAQEBXV1dZWVlZWVlZWVlmZmZYWFhYWFhZWVlaWlr/0yH/1Sv//wAVakMUAAAAlnRSTlMAAg8NMkhQQzMgJmus7PQ97iTW2aOeHvh1h8NuCm3e45qQmJwHTIkDjI0BHlSKwLwd7epp/ksJpKUL1Q60sbO76OVmAi9wCTht/8T/8qM0KvE6i9tVXvklq2IW/Syp9fKGFfZha/w/1wRj5OO1XAPUTT7JeChWfJeioJN0Thoby8XCODW8v+iy8AQ1drf0BTp8RREXDAGfr84QAAABwUlEQVR42u3W505UURQF4HXHaDSxFzTjaEQJWBL7oI5iA9TjHgtiHyX03uEvvRNIaPO8lx8EAjN35u7ss0kInO8F1l6n5cBxHMdx9gUPfEP+psIOqBsc6Kct1d+qPKgaH6MM1d/TUPPrNwXo74OSHz8p2M0SKCgpppxePIe1ojLKIzEMS+kblNdIKew0UognadhobqIwl2ChtYVCXSyAXBsxXIBYrJ0YUv8gdZlY/kMqSiw1pZD5myKeOGT+ENM15BZBbj6YfMgkiOuQqIEXA5cHiQixHYbEKrEdkS0R2DxZQFQWwPeauI5B5BUxJYUNiokpuldvclGSeI5C6BOxXE1D6DOxXIHYJDE8jEFsIkXhHsFCIYUa9WBh7SyFSA7CypnTlNfjOCydOsnbALmqr3nmb4OCLwnK4UEcKp49/Rjo3n0oWTKB7oIhYvFa+noBFbwAuQUT5I6oAX/WMsUG8ybADPTMzZpsS1A0Y7ItQ1GlybYCRRUmyzloKj9hMp2HquMm0wewRMR/K3+XAwp86HppdqqFsvdmh/o6aLtltmuAutvXeUdIrvztG7Ohpxe7413l1PRiR2dXNxzHcRznoFkH53bMTg4iMVQAAAAASUVORK5CYII=",
+	"res://SmartThingsIcons/Air_Conditioner_2.png": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAABVlBMVEUAAABYWFhZWVlZWVlbW1taW1xYWFhaWlpbX2FaWlpbXV9ZWlprjZ+E1P9+xOp9v+Nwm7JqiZp6uNlph5dwnLNqiptidH1phZRmfYpdZmp/xux8vN5yn7dsj6KByvJ9wOR7utxicnpdZGhjdoBhcHhkeYRsjqFdY2d+wuaD0/6D0Pp1qsaD0vyC0PpfaG1zpb+C0Pl6t9hyoLl9weZbXmB+xOlphZV8veBgbnaD0fttk6hyobplfYphcXp1qMR0qMNohJNwmrFbXV5gbHNfa3JdZmt8vuJzorxeZmt5s9Nle4dZWVllfIhvl61yort4s9Nulqxzo72Cz/h0psF8vN9ohZRjdX94sdBcYWSAyO9ri51ZWVlZWVllfYldZWljdH5aXV5YWFhvmbCCzfZcYmVkeINulKlulqt3rsxYWFhaWlpbYGJZWVlcXFxZWVlZWVlZWVlbW1sN62lBAAAAcnRSTlMAsP9QTP/bRP/////////////////////////////////////////////////////////////////////////////////////////w////////////////////kv7/////Yv////////+TY//xGXOkryqHc5xWAAACIklEQVR42u3Zx25aURRG4esdY2Ng0Y1777339N4T915i4xaMwe8/CcJXRygyjPYdIJ3vBdbwl/Z2LMuy1DzUPvtP7YOjp75OnlBX7yi5lTJuHRV/paw/joLsnZR1l1UI3EsF9wqBnBi+gdW1tdUBnxg5hUBeXL6DfYr2D0wirxCokUdDcYz4kDyq0QvsDVNieE870LAL0Jbo70+0Aew2KAeeA1z7pMB3DdCsHOgG2sXVDnTrBlqAcEBcgTDQohpoBqJiRIFm1UACiIkRAxKqgSZgUIxBoEk1cAqMiTEGnKoGzjZgvEdcL8Zh40w1IOtAxC9F/giwLrqBD6NA+FIKLsPA6GflgDQCsLW5uQVATLQD8oMSv0U/IE2duDpfixcByVxFACJXGdEOGP537/1i6AYMDwPBVEcy2ZEKehQILi5QtLAY9CKQ/oXxZU8/kIlQ4mNGffRvALpCfX2hLoAb7dH/DpA8k4K3bwC+KgfiwCdx/QTiuoEToNUvLn8rcKIaOAaSYiSBY/XRbxSjUX30t4GQGCFgWzWwA7wS4yWwoxoITMPKsriWV2A6oBqQKWBpXorml4Ap0Q1MTgBzKSlIzQETk8oBCQGMzMzOzowAhEQ70BClRNSLPYhd4LqIebNo6fMwQPg87d0m9/b09Fbz6NuADdiADdiADVRxIC8V5FWO4xXkquG8X+lB8S1bDS8Wxzk8kicdHVbLm6vco86yLEvLPzcvT5MDMx+HAAAAAElFTkSuQmCC"
+}
+
+
+static func create_texture(path: String) -> Texture2D:
+	var encoded: String = EMBEDDED_PNGS.get(path, "")
+	if encoded.is_empty():
+		return null
+	var png_bytes: PackedByteArray = Marshalls.base64_to_raw(encoded)
+	if png_bytes.is_empty():
+		return null
+	var image := Image.new()
+	if image.load_png_from_buffer(png_bytes) != OK:
+		return null
+	return ImageTexture.create_from_image(image)

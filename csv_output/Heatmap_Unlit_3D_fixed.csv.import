@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dteg2r4x3mvjn"
+
+[deps]
+
+files=["res://csv_output/Heatmap_Unlit_3D_fixed.Value.translation", "res://csv_output/Heatmap_Unlit_3D_fixed.Description.translation"]
+
+source_file="res://csv_output/Heatmap_Unlit_3D_fixed.csv"
+dest_files=["res://csv_output/Heatmap_Unlit_3D_fixed.Value.translation", "res://csv_output/Heatmap_Unlit_3D_fixed.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cthjmo2lublx1"
+
+[deps]
+
+files=["res://csv_output/Simple_Lit_Overlay_fixed.Value.translation", "res://csv_output/Simple_Lit_Overlay_fixed.Description.translation"]
+
+source_file="res://csv_output/Simple_Lit_Overlay_fixed.csv"
+dest_files=["res://csv_output/Simple_Lit_Overlay_fixed.Value.translation", "res://csv_output/Simple_Lit_Overlay_fixed.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cw0afgr7crrcs"
+
+[deps]
+
+files=["res://csv_output/wall_render_outer_side_fixed.Value.translation", "res://csv_output/wall_render_outer_side_fixed.Description.translation"]
+
+source_file="res://csv_output/wall_render_outer_side_fixed.csv"
+dest_files=["res://csv_output/wall_render_outer_side_fixed.Value.translation", "res://csv_output/wall_render_outer_side_fixed.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

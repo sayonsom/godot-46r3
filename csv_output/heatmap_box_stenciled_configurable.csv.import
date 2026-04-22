@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c0vwowsyebbsv"
+
+[deps]
+
+files=["res://csv_output/heatmap_box_stenciled_configurable.Type.translation", "res://csv_output/heatmap_box_stenciled_configurable.Range/Hint.translation", "res://csv_output/heatmap_box_stenciled_configurable.Default Value.translation", "res://csv_output/heatmap_box_stenciled_configurable.Description.translation"]
+
+source_file="res://csv_output/heatmap_box_stenciled_configurable.csv"
+dest_files=["res://csv_output/heatmap_box_stenciled_configurable.Type.translation", "res://csv_output/heatmap_box_stenciled_configurable.Range/Hint.translation", "res://csv_output/heatmap_box_stenciled_configurable.Default Value.translation", "res://csv_output/heatmap_box_stenciled_configurable.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

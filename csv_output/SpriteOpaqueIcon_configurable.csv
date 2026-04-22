@@ -1,0 +1,8 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_MainTex,sampler2D,hint_albedo,white texture,Base texture
+_AlphaCutting,float,"hint_range(0.0, 1.0)",0.9,Alpha threshold for cutting
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Base color tint
+_TexColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Texture color
+_TextureOpacity,float,"hint_range(0.0, 1.0)",1.0,Texture blending opacity
+_HorizontalFlip,bool,hint_toggle,false,Horizontal flip toggle
+_VerticalFlip,bool,hint_toggle,false,Vertical flip toggle

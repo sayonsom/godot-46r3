@@ -1,0 +1,4 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_MainTex,sampler2D,hint_albedo,-,Main texture
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Color tint
+_HorizontalFlip,bool,hint_toggle,false,Horizontal flip toggle

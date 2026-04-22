@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://j1qj62kd4fnv"
+
+[deps]
+
+files=["res://csv_output/device_progress_fixed.Value.translation", "res://csv_output/device_progress_fixed.Description.translation"]
+
+source_file="res://csv_output/device_progress_fixed.csv"
+dest_files=["res://csv_output/device_progress_fixed.Value.translation", "res://csv_output/device_progress_fixed.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

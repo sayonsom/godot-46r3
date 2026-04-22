@@ -1,0 +1,36 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_MainTex,sampler2D,hint_albedo,-,Font atlas texture
+_TextureWidth,float,"hint_range(0, 8192)",512,Texture width
+_TextureHeight,float,"hint_range(0, 8192)",512,Texture height
+_GradientScale,float,"hint_range(0, 32)",5,Gradient scale for SDF
+_FaceColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Face color and alpha
+_FaceDilate,float,"hint_range(-1, 1)",0,Face dilation
+_OutlineColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 1.0)",Outline color and alpha
+_OutlineWidth,float,"hint_range(0, 1)",0,Outline thickness
+_OutlineSoftness,float,"hint_range(0, 1)",0,Outline softness
+_UnderlayColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 0.5)",Underlay color and alpha
+_UnderlayOffsetX,float,"hint_range(-1, 1)",0,Underlay offset X
+_UnderlayOffsetY,float,"hint_range(-1, 1)",0,Underlay offset Y
+_UnderlayDilate,float,"hint_range(-1, 1)",0,Underlay dilation
+_UnderlaySoftness,float,"hint_range(0, 1)",0,Underlay softness
+_WeightNormal,float,-,0,Font weight normal
+_WeightBold,float,-,0.5,Font weight bold
+_ScaleRatioA,float,-,1,Scale ratio A
+_ScaleRatioB,float,-,1,Scale ratio B
+_ScaleRatioC,float,-,1,Scale ratio C
+_ScaleX,float,-,1,Scale X
+_ScaleY,float,-,1,Scale Y
+_PerspectiveFilter,float,"hint_range(0, 1)",0.875,Perspective correction
+_Sharpness,float,"hint_range(-1, 1)",0,Sharpness adjustment
+_VertexOffsetX,float,-,0,Vertex offset X
+_VertexOffsetY,float,-,0,Vertex offset Y
+_ClipRect,vec4,-,"vec4(-32767, -32767, 32767, 32767)",Clipping rectangle
+_MaskSoftnessX,float,-,0,Mask softness X
+_MaskSoftnessY,float,-,0,Mask softness Y
+_StencilComp,float,-,8,Stencil comparison
+_Stencil,float,-,0,Stencil ID
+_StencilOp,float,-,0,Stencil operation
+_StencilWriteMask,float,-,255,Stencil write mask
+_StencilReadMask,float,-,255,Stencil read mask
+_CullMode,float,-,0,Cull mode
+_ColorMask,float,-,15,Color mask

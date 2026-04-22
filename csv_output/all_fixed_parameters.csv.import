@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bu2rdcqlws5eh"
+
+[deps]
+
+files=["res://csv_output/all_fixed_parameters.Value.translation", "res://csv_output/all_fixed_parameters.Description.translation", "res://csv_output/all_fixed_parameters.Shader Name.translation"]
+
+source_file="res://csv_output/all_fixed_parameters.csv"
+dest_files=["res://csv_output/all_fixed_parameters.Value.translation", "res://csv_output/all_fixed_parameters.Description.translation", "res://csv_output/all_fixed_parameters.Shader Name.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

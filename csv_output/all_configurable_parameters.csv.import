@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://nn82exi5aoxv"
+
+[deps]
+
+files=["res://csv_output/all_configurable_parameters.Type.translation", "res://csv_output/all_configurable_parameters.Range/Hint.translation", "res://csv_output/all_configurable_parameters.Default Value.translation", "res://csv_output/all_configurable_parameters.Description.translation", "res://csv_output/all_configurable_parameters.Shader Name.translation"]
+
+source_file="res://csv_output/all_configurable_parameters.csv"
+dest_files=["res://csv_output/all_configurable_parameters.Type.translation", "res://csv_output/all_configurable_parameters.Range/Hint.translation", "res://csv_output/all_configurable_parameters.Default Value.translation", "res://csv_output/all_configurable_parameters.Description.translation", "res://csv_output/all_configurable_parameters.Shader Name.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

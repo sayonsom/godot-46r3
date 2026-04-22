@@ -1,0 +1,14 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_BaseMap,sampler2D,hint_albedo,white texture,Base texture map
+_BaseColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Base color
+_Cutoff,float,"hint_range(0.0, 1.0)",0.5,Alpha cutoff threshold
+_Smoothness,float,"hint_range(0.0, 1.0)",0.5,Surface smoothness
+_SpecColor,vec4,hint_color,"vec4(0.5, 0.5, 0.5, 0.5)",Specular color
+_SpecGlossMap,sampler2D,-,white texture,Specular/gloss map
+_SpecularHighlights,float,-,1.0,Specular highlight intensity
+_BumpMap,sampler2D,hint_normal,bump texture,Normal map
+_BumpScale,float,-,1.0,Normal map scale
+_EmissionColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 0.0)",Emission color
+_EmissionMap,sampler2D,-,white texture,Emission map
+_AlphaClip,bool,hint_toggle,false,Alpha clipping toggle
+_ReceiveShadows,bool,hint_toggle,true,Shadow receiving toggle

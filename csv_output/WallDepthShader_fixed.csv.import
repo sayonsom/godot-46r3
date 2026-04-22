@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://xaj8eodyb3hi"
+
+[deps]
+
+files=["res://csv_output/WallDepthShader_fixed.Value.translation", "res://csv_output/WallDepthShader_fixed.Description.translation"]
+
+source_file="res://csv_output/WallDepthShader_fixed.csv"
+dest_files=["res://csv_output/WallDepthShader_fixed.Value.translation", "res://csv_output/WallDepthShader_fixed.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

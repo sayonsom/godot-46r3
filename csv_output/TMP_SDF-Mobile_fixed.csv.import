@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://crr1p0lkn5ts2"
+
+[deps]
+
+files=["res://csv_output/TMP_SDF-Mobile_fixed.Value.translation", "res://csv_output/TMP_SDF-Mobile_fixed.Description.translation"]
+
+source_file="res://csv_output/TMP_SDF-Mobile_fixed.csv"
+dest_files=["res://csv_output/TMP_SDF-Mobile_fixed.Value.translation", "res://csv_output/TMP_SDF-Mobile_fixed.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1,0 +1,9 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_MainTex,sampler2D,hint_albedo,-,Main texture
+_IconColor,vec4,hint_color,"vec4(0.792, 0.792, 0.792, 0.0)",Icon color tint
+_BGTex,sampler2D,hint_albedo,-,Background texture
+_Color,vec4,hint_color,"vec4(0.823, 0.823, 0.823, 0.0)",Background color tint
+_Metallic,float,"hint_range(0.0, 1.0)",0.3,Background metallic
+_Glossiness,float,"hint_range(0.0, 1.0)",0.9,Background glossiness
+_IconMetallic,float,"hint_range(0.0, 1.0)",0.0,Icon metallic
+_IconGlossiness,float,"hint_range(0.0, 1.0)",0.0,Icon glossiness

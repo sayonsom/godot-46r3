@@ -1,0 +1,19 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_GradientTexture,sampler2D,hint_black_albedo,white texture,Gradient color texture
+_BaseIntensity,float,"hint_range(0.0, 1.0)",0.0,Base intensity value
+_DitheringRadius,float,"hint_range(0.0, 1.0)",0.5,Dithering radius
+_CutRange,vec2,-,"vec2(0.0, 0.2)",Intensity cut range
+_BaseRadius,float,-,0.0,Base radius
+_BaseOpacity,float,"hint_range(0.0, 1.0)",1.0,Base opacity
+_BlendColorRatio,float,"hint_range(0.0, 1.0)",0.0,Color blend ratio
+_BlendOverlaySceneOpacity,float,"hint_range(0.0, 1.0)",0.0,Scene overlay opacity
+_BlendOverlaySceneRatio,float,"hint_range(0.0, 1.0)",0.0,Scene blend ratio
+_BlendOverlayGaussianCoef,float,"hint_range(0.0, 1.0)",0.0,Gaussian coefficient
+_BlendOverlayGaussianBase,float,"hint_range(0.0, 1.0)",0.0,Gaussian base value
+_BlendOverlayGaussianOpacity,float,"hint_range(0.0, 1.0)",0.0,Gaussian opacity
+_BlendOverlayGaussianRatio,float,"hint_range(0.0, 1.0)",0.0,Gaussian blend ratio
+_BlendOverlayWhiteOpacity,float,"hint_range(0.0, 1.0)",0.0,White overlay opacity
+_InterestOpacityRange,vec2,-,"vec2(0.0, 0.2)",Interest opacity range
+_InterestOpacityUseGaussian,bool,hint_toggle,false,Use Gaussian for interest
+_InterestOpacityGaussianCoef,float,"hint_range(0.0, 1.0)",0.0,Interest Gaussian coefficient
+_InterestOpacityRatio,float,"hint_range(0.0, 1.0)",0.0,Interest opacity ratio

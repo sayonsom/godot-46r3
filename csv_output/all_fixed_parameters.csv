@@ -1,0 +1,72 @@
+Parameter Name,Value,Description,Shader Name
+shader_type,spatial,3D shader type,SpriteOpaque
+render_mode,"unshaded, cull_disabled, depth_draw_always",Rendering modes,SpriteOpaque
+shader_type,spatial,3D shader type,WallDepthShader
+render_mode,"depth_test_disabled, depth_draw_opaque, cull_disabled, unshaded",Rendering modes,WallDepthShader
+shader_type,spatial,3D shader type,Simple Lit Overlay
+render_mode,"blend_mix, depth_test_disabled, depth_draw_never, cull_disabled, unshaded",Rendering modes,Simple Lit Overlay
+shader_type,spatial,3D shader type,SpriteOpaqueIcon
+render_mode,"unshaded, cull_disabled, depth_draw_always",Rendering modes,SpriteOpaqueIcon
+shader_type,canvas_item,2D shader type,SpriteColorShadow
+render_mode,blend_mix,Rendering modes,SpriteColorShadow
+shader_type,spatial,3D shader type,Heatmap H Base Stenciled
+render_mode,"blend_mix, depth_draw_never, cull_back, unshaded",Rendering modes,Heatmap H Base Stenciled
+shader_type,spatial,3D shader type,Heatmap H Cover Stenciled
+render_mode,"blend_mix, depth_draw_never, cull_back, unshaded",Rendering modes,Heatmap H Cover Stenciled
+shader_type,spatial,3D shader type,Heatmap Unlit 3D
+render_mode,"blend_mix, depth_draw_never, cull_back, unshaded",Rendering modes,Heatmap Unlit 3D
+HeatmapAttractor struct,"position: vec3, radius: float, intensity: float",Attractor data structure,Heatmap Unlit 3D
+shader_type,spatial,3D shader type,Heatmap Unlit 3D H Base
+render_mode,"blend_mix, depth_draw_never, cull_back, unshaded",Rendering modes,Heatmap Unlit 3D H Base
+HeatmapAttractor struct,"position: vec3, radius: float, intensity: float",Attractor data structure,Heatmap Unlit 3D H Base
+shader_type,spatial,3D shader type,Heatmap Unlit 3D H Cover
+render_mode,"blend_mix, depth_draw_never, cull_back, unshaded",Rendering modes,Heatmap Unlit 3D H Cover
+HeatmapAttractor struct,"position: vec3, radius: float, intensity: float",Attractor data structure,Heatmap Unlit 3D H Cover
+shader_type,spatial,3D shader type,Heatmap Base
+render_mode,"blend_mix, depth_draw_never, cull_back, unshaded",Rendering modes,Heatmap Base
+HeatmapAttractor struct,"position: vec3, radius: float, intensity: float",Attractor data structure,Heatmap Base
+shader_type,spatial,3D shader type,TMP_SDF-Mobile
+render_mode,"unshaded, cull_disabled, depth_draw_opaque, blend_mix",Rendering modes,TMP_SDF-Mobile
+shader_type,spatial,3D shader type,TMP_SDF-Mobile-2-Pass-Outline
+render_mode,"unshaded, cull_disabled, depth_draw_never, blend_mix",Rendering modes,TMP_SDF-Mobile-2-Pass-Outline
+shader_type,spatial,3D shader type,TMP_SDF-Mobile-2-Pass-Face
+render_mode,"unshaded, cull_disabled, depth_draw_opaque, blend_mix",Rendering modes,TMP_SDF-Mobile-2-Pass-Face
+shader_type,canvas_item,2D shader type,two_tone_color_unlit
+render_mode,blend_mix,Rendering modes,two_tone_color_unlit
+shader_type,canvas_item,2D shader type,two_tone_transparent_color_unlit
+render_mode,blend_mix,Rendering modes,two_tone_transparent_color_unlit
+shader_type,canvas_item,2D shader type,two_tone_color_unlit_opacity
+render_mode,blend_mix,Rendering modes,two_tone_color_unlit_opacity
+shader_type,spatial,3D shader type,house_texture_lit
+render_mode,"cull_disabled, diffuse_burley, specular_schlick_ggx",Rendering modes,house_texture_lit
+shader_type,canvas_item,2D shader type,house_texture_unlit
+render_mode,blend_mix,Rendering modes,house_texture_unlit
+shader_type,spatial,3D shader type,shadow_catcher
+render_mode,"unshaded, cull_disabled, depth_draw_opaque",Rendering modes,shadow_catcher
+shader_type,spatial,3D shader type,triplanar_lit
+render_mode,"blend_mix, cull_disabled, depth_draw_opaque",Rendering modes,triplanar_lit
+shader_type,canvas_item,2D shader type,divider
+render_mode,blend_mix,Rendering modes,divider
+shader_type,canvas_item,2D shader type,edit_mode_grid
+render_mode,blend_mix,Rendering modes,edit_mode_grid
+shader_type,canvas_item,2D shader type,sprite_color
+render_mode,blend_mix,Rendering modes,sprite_color
+shader_type,spatial,3D shader type,wall_render_outer
+render_mode,"blend_mix, depth_draw_never, cull_back, unshaded",Rendering modes,wall_render_outer
+shader_type,spatial,3D shader type,character_lit
+render_mode,"blend_mix, depth_draw_always, cull_disabled, diffuse_burley, specular_schlick_ggx",Rendering modes,character_lit
+shader_type,canvas_item,2D shader type,two_layered_lit
+render_mode,blend_mix,Rendering modes,two_layered_lit
+shader_type,canvas_item,2D shader type,block_3d
+render_mode,blend_mix,Rendering modes,block_3d
+shader_type,canvas_item,2D shader type,device_progress
+render_mode,blend_mix,Rendering modes,device_progress
+shader_type,canvas_item,2D shader type,sprite_color_zwrite
+render_mode,"blend_mix, depth_draw_always",Rendering modes,sprite_color_zwrite
+shader_type,canvas_item,2D shader type,sprite_icon_unlit
+render_mode,blend_mix,Rendering modes,sprite_icon_unlit
+shader_type,spatial,3D shader type,heatmap_box_stenciled
+render_mode,"blend_mix, depth_draw_never, cull_back, unshaded",Rendering modes,heatmap_box_stenciled
+HeatmapAttractor struct,"position: vec3, radius: float, intensity: float",Attractor data structure,heatmap_box_stenciled
+shader_type,spatial,3D shader type,wall_render_outer_side
+render_mode,"blend_mix, depth_draw_never, cull_back, unshaded",Rendering modes,wall_render_outer_side

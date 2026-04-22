@@ -1,0 +1,38 @@
+# Godot 4+ specific ignores
+.godot/
+/android/build/
+/android-app/app/build/
+/android-app/.gradle/
+/android-app/build/
+
+# Python venv
+.venv/
+__pycache__/
+*.pyc
+
+# Delivery artifacts
+Ready for Delivery/
+Ready for Delivery.zip
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Temp screenshots / debug artifacts
+tmp/
+tmp_*.png
+tmp_*.png.import
+tmp_*.xml
+
+# Godot imported files cache (keep source, drop caches)
+*.translation
+
+# IDE
+.vscode/
+.idea/
+
+# Claude
+.claude/
+

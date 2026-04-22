@@ -1,0 +1,371 @@
+Uniform Name,Type,Range/Hint,Default Value,Description,Shader Name
+_MainTex,sampler2D,hint_albedo,white texture,Base texture,SpriteOpaque
+_AlphaCutting,float,"hint_range(0.0, 1.0)",0.9,Alpha threshold for cutting,SpriteOpaque
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Base color tint,SpriteOpaque
+_TextureOpacity,float,"hint_range(0.0, 1.0)",0.0,Texture blending opacity,SpriteOpaque
+_HorizontalFlip,bool,hint_toggle,false,Horizontal flip toggle,SpriteOpaque
+_VerticalFlip,bool,hint_toggle,false,Vertical flip toggle,SpriteOpaque
+topColor,vec3,-,"vec3(1.0, 0.0, 0.0)",Top surface color,WallDepthShader
+side1Color,vec3,-,"vec3(0.0, 0.0, 0.0)",Side color 1,WallDepthShader
+side2Color,vec3,-,"vec3(0.0, 1.0, 0.0)",Side color 2,WallDepthShader
+lightColor,vec3,-,"vec3(0.0, 0.0, 1.0)",Light color for diffuse,WallDepthShader
+_BaseMap,sampler2D,hint_albedo,white texture,Base texture map,Simple Lit Overlay
+_BaseColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Base color,Simple Lit Overlay
+_Cutoff,float,"hint_range(0.0, 1.0)",0.5,Alpha cutoff threshold,Simple Lit Overlay
+_Smoothness,float,"hint_range(0.0, 1.0)",0.5,Surface smoothness,Simple Lit Overlay
+_SpecColor,vec4,hint_color,"vec4(0.5, 0.5, 0.5, 0.5)",Specular color,Simple Lit Overlay
+_SpecGlossMap,sampler2D,-,white texture,Specular/gloss map,Simple Lit Overlay
+_SpecularHighlights,float,-,1.0,Specular highlight intensity,Simple Lit Overlay
+_BumpMap,sampler2D,hint_normal,bump texture,Normal map,Simple Lit Overlay
+_BumpScale,float,-,1.0,Normal map scale,Simple Lit Overlay
+_EmissionColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 0.0)",Emission color,Simple Lit Overlay
+_EmissionMap,sampler2D,-,white texture,Emission map,Simple Lit Overlay
+_AlphaClip,bool,hint_toggle,false,Alpha clipping toggle,Simple Lit Overlay
+_ReceiveShadows,bool,hint_toggle,true,Shadow receiving toggle,Simple Lit Overlay
+_MainTex,sampler2D,hint_albedo,white texture,Base texture,SpriteOpaqueIcon
+_AlphaCutting,float,"hint_range(0.0, 1.0)",0.9,Alpha threshold for cutting,SpriteOpaqueIcon
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Base color tint,SpriteOpaqueIcon
+_TexColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Texture color,SpriteOpaqueIcon
+_TextureOpacity,float,"hint_range(0.0, 1.0)",1.0,Texture blending opacity,SpriteOpaqueIcon
+_HorizontalFlip,bool,hint_toggle,false,Horizontal flip toggle,SpriteOpaqueIcon
+_VerticalFlip,bool,hint_toggle,false,Vertical flip toggle,SpriteOpaqueIcon
+_MainTex,sampler2D,hint_albedo,white texture,Base texture,SpriteColorShadow
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Color multiplier,SpriteColorShadow
+_GradientTexture,sampler2D,hint_black_albedo,white texture,Gradient color texture,Heatmap H Base Stenciled
+_BaseIntensity,float,"hint_range(0.0, 1.0)",0.0,Base intensity value,Heatmap H Base Stenciled
+_DitheringRadius,float,"hint_range(0.0, 1.0)",0.5,Dithering radius,Heatmap H Base Stenciled
+_CutRange,vec2,-,"vec2(0.0, 0.2)",Intensity cut range,Heatmap H Base Stenciled
+_BaseRadius,float,-,0.0,Base radius,Heatmap H Base Stenciled
+_BaseOpacity,float,"hint_range(0.0, 1.0)",1.0,Base opacity,Heatmap H Base Stenciled
+_BlendColorRatio,float,"hint_range(0.0, 1.0)",0.0,Color blend ratio,Heatmap H Base Stenciled
+_BlendOverlaySceneOpacity,float,"hint_range(0.0, 1.0)",0.0,Scene overlay opacity,Heatmap H Base Stenciled
+_BlendOverlaySceneRatio,float,"hint_range(0.0, 1.0)",0.0,Scene blend ratio,Heatmap H Base Stenciled
+_BlendOverlayWhiteOpacity,float,"hint_range(0.0, 1.0)",0.0,White overlay opacity,Heatmap H Base Stenciled
+_GradientTexture,sampler2D,hint_black_albedo,white texture,Gradient color texture,Heatmap H Cover Stenciled
+_BaseIntensity,float,"hint_range(0.0, 1.0)",0.0,Base intensity value,Heatmap H Cover Stenciled
+_DitheringRadius,float,"hint_range(0.0, 1.0)",0.5,Dithering radius,Heatmap H Cover Stenciled
+_CutRange,vec2,-,"vec2(0.0, 0.2)",Intensity cut range,Heatmap H Cover Stenciled
+_BaseRadius,float,-,0.0,Base radius,Heatmap H Cover Stenciled
+_BaseOpacity,float,"hint_range(0.0, 1.0)",1.0,Base opacity,Heatmap H Cover Stenciled
+_BlendColorRatio,float,"hint_range(0.0, 1.0)",0.0,Color blend ratio,Heatmap H Cover Stenciled
+_BlendOverlaySceneOpacity,float,"hint_range(0.0, 1.0)",0.0,Scene overlay opacity,Heatmap H Cover Stenciled
+_BlendOverlaySceneRatio,float,"hint_range(0.0, 1.0)",0.0,Scene blend ratio,Heatmap H Cover Stenciled
+_BlendOverlayGaussianCoef,float,"hint_range(0.0, 1.0)",0.0,Gaussian coefficient,Heatmap H Cover Stenciled
+_BlendOverlayGaussianBase,float,"hint_range(0.0, 1.0)",0.0,Gaussian base value,Heatmap H Cover Stenciled
+_BlendOverlayGaussianOpacity,float,"hint_range(0.0, 1.0)",0.0,Gaussian opacity,Heatmap H Cover Stenciled
+_BlendOverlayGaussianRatio,float,"hint_range(0.0, 1.0)",0.0,Gaussian blend ratio,Heatmap H Cover Stenciled
+_BlendOverlayWhiteOpacity,float,"hint_range(0.0, 1.0)",0.0,White overlay opacity,Heatmap H Cover Stenciled
+_InterestOpacityRange,vec2,-,"vec2(0.0, 0.2)",Interest opacity range,Heatmap H Cover Stenciled
+_InterestOpacityUseGaussian,bool,hint_toggle,false,Use Gaussian for interest,Heatmap H Cover Stenciled
+_InterestOpacityGaussianCoef,float,"hint_range(0.0, 1.0)",0.0,Interest Gaussian coefficient,Heatmap H Cover Stenciled
+_InterestOpacityRatio,float,"hint_range(0.0, 1.0)",0.0,Interest opacity ratio,Heatmap H Cover Stenciled
+_GradientTexture,sampler2D,hint_black_albedo,white texture,Gradient color texture,Heatmap Unlit 3D
+_BaseIntensity,float,"hint_range(0.0, 1.0)",0.0,Base intensity value,Heatmap Unlit 3D
+_DitheringRadius,float,"hint_range(0.0, 1.0)",0.5,Dithering radius,Heatmap Unlit 3D
+_CutRange,vec2,-,"vec2(0.0, 0.2)",Intensity cut range,Heatmap Unlit 3D
+_BaseRadius,float,-,0.0,Base radius,Heatmap Unlit 3D
+_BaseOpacity,float,"hint_range(0.0, 1.0)",1.0,Base opacity,Heatmap Unlit 3D
+_BlendColorRatio,float,"hint_range(0.0, 1.0)",0.0,Color blend ratio,Heatmap Unlit 3D
+_BlendOverlaySceneOpacity,float,"hint_range(0.0, 1.0)",0.0,Scene overlay opacity,Heatmap Unlit 3D
+_BlendOverlaySceneRatio,float,"hint_range(0.0, 1.0)",0.0,Scene blend ratio,Heatmap Unlit 3D
+_BlendOverlayGaussianCoef,float,"hint_range(0.0, 1.0)",0.0,Gaussian coefficient,Heatmap Unlit 3D
+_BlendOverlayGaussianBase,float,"hint_range(0.0, 1.0)",0.0,Gaussian base value,Heatmap Unlit 3D
+_BlendOverlayGaussianOpacity,float,"hint_range(0.0, 1.0)",0.0,Gaussian opacity,Heatmap Unlit 3D
+_BlendOverlayGaussianRatio,float,"hint_range(0.0, 1.0)",0.0,Gaussian blend ratio,Heatmap Unlit 3D
+_BlendOverlayWhiteOpacity,float,"hint_range(0.0, 1.0)",0.0,White overlay opacity,Heatmap Unlit 3D
+_InterestOpacityRange,vec2,-,"vec2(0.0, 0.2)",Interest opacity range,Heatmap Unlit 3D
+_InterestOpacityUseGaussian,bool,hint_toggle,false,Use Gaussian for interest,Heatmap Unlit 3D
+_InterestOpacityGaussianCoef,float,"hint_range(0.0, 1.0)",0.0,Interest Gaussian coefficient,Heatmap Unlit 3D
+_InterestOpacityRatio,float,"hint_range(0.0, 1.0)",0.0,Interest opacity ratio,Heatmap Unlit 3D
+_GradientTexture,sampler2D,hint_black_albedo,white texture,Gradient color texture,Heatmap Unlit 3D H Base
+_BaseIntensity,float,"hint_range(0.0, 1.0)",0.0,Base intensity value,Heatmap Unlit 3D H Base
+_DitheringRadius,float,"hint_range(0.0, 1.0)",0.5,Dithering radius,Heatmap Unlit 3D H Base
+_CutRange,vec2,-,"vec2(0.0, 0.2)",Intensity cut range,Heatmap Unlit 3D H Base
+_BaseRadius,float,-,0.0,Base radius,Heatmap Unlit 3D H Base
+_BaseOpacity,float,"hint_range(0.0, 1.0)",1.0,Base opacity,Heatmap Unlit 3D H Base
+_BlendColorRatio,float,"hint_range(0.0, 1.0)",0.0,Color blend ratio,Heatmap Unlit 3D H Base
+_BlendOverlaySceneOpacity,float,"hint_range(0.0, 1.0)",0.0,Scene overlay opacity,Heatmap Unlit 3D H Base
+_BlendOverlaySceneRatio,float,"hint_range(0.0, 1.0)",0.0,Scene blend ratio,Heatmap Unlit 3D H Base
+_BlendOverlayWhiteOpacity,float,"hint_range(0.0, 1.0)",0.0,White overlay opacity,Heatmap Unlit 3D H Base
+_GradientTexture,sampler2D,hint_black_albedo,white texture,Gradient color texture,Heatmap Unlit 3D H Cover
+_BaseIntensity,float,"hint_range(0.0, 1.0)",0.0,Base intensity value,Heatmap Unlit 3D H Cover
+_DitheringRadius,float,"hint_range(0.0, 1.0)",0.5,Dithering radius,Heatmap Unlit 3D H Cover
+_CutRange,vec2,-,"vec2(0.0, 0.2)",Intensity cut range,Heatmap Unlit 3D H Cover
+_BaseRadius,float,-,0.0,Base radius,Heatmap Unlit 3D H Cover
+_BaseOpacity,float,"hint_range(0.0, 1.0)",1.0,Base opacity,Heatmap Unlit 3D H Cover
+_BlendColorRatio,float,"hint_range(0.0, 1.0)",0.0,Color blend ratio,Heatmap Unlit 3D H Cover
+_BlendOverlaySceneOpacity,float,"hint_range(0.0, 1.0)",0.0,Scene overlay opacity,Heatmap Unlit 3D H Cover
+_BlendOverlaySceneRatio,float,"hint_range(0.0, 1.0)",0.0,Scene blend ratio,Heatmap Unlit 3D H Cover
+_BlendOverlayGaussianCoef,float,"hint_range(0.0, 1.0)",0.0,Gaussian coefficient,Heatmap Unlit 3D H Cover
+_BlendOverlayGaussianBase,float,"hint_range(0.0, 1.0)",0.0,Gaussian base value,Heatmap Unlit 3D H Cover
+_BlendOverlayGaussianOpacity,float,"hint_range(0.0, 1.0)",0.0,Gaussian opacity,Heatmap Unlit 3D H Cover
+_BlendOverlayGaussianRatio,float,"hint_range(0.0, 1.0)",0.0,Gaussian blend ratio,Heatmap Unlit 3D H Cover
+_BlendOverlayWhiteOpacity,float,"hint_range(0.0, 1.0)",0.0,White overlay opacity,Heatmap Unlit 3D H Cover
+_InterestOpacityRange,vec2,-,"vec2(0.0, 0.2)",Interest opacity range,Heatmap Unlit 3D H Cover
+_InterestOpacityUseGaussian,bool,hint_toggle,false,Use Gaussian for interest,Heatmap Unlit 3D H Cover
+_InterestOpacityGaussianCoef,float,"hint_range(0.0, 1.0)",0.0,Interest Gaussian coefficient,Heatmap Unlit 3D H Cover
+_InterestOpacityRatio,float,"hint_range(0.0, 1.0)",0.0,Interest opacity ratio,Heatmap Unlit 3D H Cover
+_GradientTexture,sampler2D,hint_black_albedo,white texture,Gradient color texture,Heatmap Base
+_BaseIntensity,float,"hint_range(0.0, 1.0)",0.0,Base intensity value,Heatmap Base
+_DitheringRadius,float,"hint_range(0.0, 1.0)",0.5,Dithering radius,Heatmap Base
+_CutRange,vec2,-,"vec2(0.0, 0.2)",Intensity cut range,Heatmap Base
+_BaseRadius,float,-,0.0,Base radius,Heatmap Base
+_BaseOpacity,float,"hint_range(0.0, 1.0)",1.0,Base opacity,Heatmap Base
+_BlendColorRatio,float,"hint_range(0.0, 1.0)",0.0,Color blend ratio,Heatmap Base
+_BlendOverlaySceneOpacity,float,"hint_range(0.0, 1.0)",0.0,Scene overlay opacity,Heatmap Base
+_BlendOverlaySceneRatio,float,"hint_range(0.0, 1.0)",0.0,Scene blend ratio,Heatmap Base
+_BlendOverlayGaussianCoef,float,-,0.0,Gaussian coefficient,Heatmap Base
+_BlendOverlayGaussianBase,float,-,0.0,Gaussian base value,Heatmap Base
+_BlendOverlayGaussianOpacity,float,"hint_range(0.0, 1.0)",0.0,Gaussian opacity,Heatmap Base
+_BlendOverlayGaussianRatio,float,"hint_range(0.0, 1.0)",0.0,Gaussian blend ratio,Heatmap Base
+_BlendOverlayWhiteOpacity,float,"hint_range(0.0, 1.0)",0.0,White overlay opacity,Heatmap Base
+_InterestOpacityRange,vec2,-,"vec2(0.0, 0.2)",Interest opacity range,Heatmap Base
+_InterestOpacityUseGaussian,bool,hint_toggle,false,Use Gaussian for interest,Heatmap Base
+_InterestOpacityGaussianCoef,float,-,0.0,Interest Gaussian coefficient,Heatmap Base
+_InterestOpacityRatio,float,"hint_range(0.0, 1.0)",0.0,Interest opacity ratio,Heatmap Base
+attractors,struct array,-,N/A,Heatmap attractor data,Heatmap Base
+attractor_count,int,-,0,Number of attractors,Heatmap Base
+_MainTex,sampler2D,hint_albedo,-,Font atlas texture,TMP_SDF-Mobile
+_TextureWidth,float,"hint_range(0, 8192)",512,Texture width,TMP_SDF-Mobile
+_TextureHeight,float,"hint_range(0, 8192)",512,Texture height,TMP_SDF-Mobile
+_GradientScale,float,"hint_range(0, 32)",5,Gradient scale for SDF,TMP_SDF-Mobile
+_FaceColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Face color and alpha,TMP_SDF-Mobile
+_FaceDilate,float,"hint_range(-1, 1)",0,Face dilation,TMP_SDF-Mobile
+_OutlineColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 1.0)",Outline color and alpha,TMP_SDF-Mobile
+_OutlineWidth,float,"hint_range(0, 1)",0,Outline thickness,TMP_SDF-Mobile
+_OutlineSoftness,float,"hint_range(0, 1)",0,Outline softness,TMP_SDF-Mobile
+_UnderlayColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 0.5)",Underlay color and alpha,TMP_SDF-Mobile
+_UnderlayOffsetX,float,"hint_range(-1, 1)",0,Underlay offset X,TMP_SDF-Mobile
+_UnderlayOffsetY,float,"hint_range(-1, 1)",0,Underlay offset Y,TMP_SDF-Mobile
+_UnderlayDilate,float,"hint_range(-1, 1)",0,Underlay dilation,TMP_SDF-Mobile
+_UnderlaySoftness,float,"hint_range(0, 1)",0,Underlay softness,TMP_SDF-Mobile
+_WeightNormal,float,-,0,Font weight normal,TMP_SDF-Mobile
+_WeightBold,float,-,0.5,Font weight bold,TMP_SDF-Mobile
+_ScaleRatioA,float,-,1,Scale ratio A,TMP_SDF-Mobile
+_ScaleRatioB,float,-,1,Scale ratio B,TMP_SDF-Mobile
+_ScaleRatioC,float,-,1,Scale ratio C,TMP_SDF-Mobile
+_ScaleX,float,-,1,Scale X,TMP_SDF-Mobile
+_ScaleY,float,-,1,Scale Y,TMP_SDF-Mobile
+_PerspectiveFilter,float,"hint_range(0, 1)",0.875,Perspective correction,TMP_SDF-Mobile
+_Sharpness,float,"hint_range(-1, 1)",0,Sharpness adjustment,TMP_SDF-Mobile
+_VertexOffsetX,float,-,0,Vertex offset X,TMP_SDF-Mobile
+_VertexOffsetY,float,-,0,Vertex offset Y,TMP_SDF-Mobile
+_ClipRect,vec4,-,"vec4(-32767, -32767, 32767, 32767)",Clipping rectangle,TMP_SDF-Mobile
+_MaskSoftnessX,float,-,0,Mask softness X,TMP_SDF-Mobile
+_MaskSoftnessY,float,-,0,Mask softness Y,TMP_SDF-Mobile
+_StencilComp,float,-,8,Stencil comparison,TMP_SDF-Mobile
+_Stencil,float,-,0,Stencil ID,TMP_SDF-Mobile
+_StencilOp,float,-,0,Stencil operation,TMP_SDF-Mobile
+_StencilWriteMask,float,-,255,Stencil write mask,TMP_SDF-Mobile
+_StencilReadMask,float,-,255,Stencil read mask,TMP_SDF-Mobile
+_CullMode,float,-,0,Cull mode,TMP_SDF-Mobile
+_ColorMask,float,-,15,Color mask,TMP_SDF-Mobile
+_MainTex,sampler2D,hint_albedo,-,Font atlas texture,TMP_SDF-Mobile-2-Pass-Outline
+_TextureWidth,float,"hint_range(0, 8192)",512,Texture width,TMP_SDF-Mobile-2-Pass-Outline
+_TextureHeight,float,"hint_range(0, 8192)",512,Texture height,TMP_SDF-Mobile-2-Pass-Outline
+_GradientScale,float,"hint_range(0, 32)",5,Gradient scale for SDF,TMP_SDF-Mobile-2-Pass-Outline
+_FaceColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Face color and alpha,TMP_SDF-Mobile-2-Pass-Outline
+_FaceDilate,float,"hint_range(-1, 1)",0,Face dilation,TMP_SDF-Mobile-2-Pass-Outline
+_OutlineColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 1.0)",Outline color and alpha,TMP_SDF-Mobile-2-Pass-Outline
+_OutlineWidth,float,"hint_range(0, 1)",0,Outline thickness,TMP_SDF-Mobile-2-Pass-Outline
+_OutlineSoftness,float,"hint_range(0, 1)",0,Outline softness,TMP_SDF-Mobile-2-Pass-Outline
+_UnderlayColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 0.5)",Underlay color and alpha,TMP_SDF-Mobile-2-Pass-Outline
+_UnderlayOffsetX,float,"hint_range(-1, 1)",0,Underlay offset X,TMP_SDF-Mobile-2-Pass-Outline
+_UnderlayOffsetY,float,"hint_range(-1, 1)",0,Underlay offset Y,TMP_SDF-Mobile-2-Pass-Outline
+_UnderlayDilate,float,"hint_range(-1, 1)",0,Underlay dilation,TMP_SDF-Mobile-2-Pass-Outline
+_UnderlaySoftness,float,"hint_range(0, 1)",0,Underlay softness,TMP_SDF-Mobile-2-Pass-Outline
+_WeightNormal,float,-,0,Font weight normal,TMP_SDF-Mobile-2-Pass-Outline
+_WeightBold,float,-,0.5,Font weight bold,TMP_SDF-Mobile-2-Pass-Outline
+_ScaleRatioA,float,-,1,Scale ratio A,TMP_SDF-Mobile-2-Pass-Outline
+_ScaleRatioB,float,-,1,Scale ratio B,TMP_SDF-Mobile-2-Pass-Outline
+_ScaleRatioC,float,-,1,Scale ratio C,TMP_SDF-Mobile-2-Pass-Outline
+_ScaleX,float,-,1,Scale X,TMP_SDF-Mobile-2-Pass-Outline
+_ScaleY,float,-,1,Scale Y,TMP_SDF-Mobile-2-Pass-Outline
+_PerspectiveFilter,float,"hint_range(0, 1)",0.875,Perspective correction,TMP_SDF-Mobile-2-Pass-Outline
+_Sharpness,float,"hint_range(-1, 1)",0,Sharpness adjustment,TMP_SDF-Mobile-2-Pass-Outline
+_VertexOffsetX,float,-,0,Vertex offset X,TMP_SDF-Mobile-2-Pass-Outline
+_VertexOffsetY,float,-,0,Vertex offset Y,TMP_SDF-Mobile-2-Pass-Outline
+_ClipRect,vec4,-,"vec4(-32767, -32767, 32767, 32767)",Clipping rectangle,TMP_SDF-Mobile-2-Pass-Outline
+_MaskSoftnessX,float,-,0,Mask softness X,TMP_SDF-Mobile-2-Pass-Outline
+_MaskSoftnessY,float,-,0,Mask softness Y,TMP_SDF-Mobile-2-Pass-Outline
+_StencilComp,float,-,8,Stencil comparison,TMP_SDF-Mobile-2-Pass-Outline
+_Stencil,float,-,0,Stencil ID,TMP_SDF-Mobile-2-Pass-Outline
+_StencilOp,float,-,0,Stencil operation,TMP_SDF-Mobile-2-Pass-Outline
+_StencilWriteMask,float,-,255,Stencil write mask,TMP_SDF-Mobile-2-Pass-Outline
+_StencilReadMask,float,-,255,Stencil read mask,TMP_SDF-Mobile-2-Pass-Outline
+_CullMode,float,-,0,Cull mode,TMP_SDF-Mobile-2-Pass-Outline
+_ColorMask,float,-,15,Color mask,TMP_SDF-Mobile-2-Pass-Outline
+_MainTex,sampler2D,hint_albedo,-,Font atlas texture,TMP_SDF-Mobile-2-Pass-Face
+_TextureWidth,float,"hint_range(0, 8192)",512,Texture width,TMP_SDF-Mobile-2-Pass-Face
+_TextureHeight,float,"hint_range(0, 8192)",512,Texture height,TMP_SDF-Mobile-2-Pass-Face
+_GradientScale,float,"hint_range(0, 32)",5,Gradient scale for SDF,TMP_SDF-Mobile-2-Pass-Face
+_FaceColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Face color and alpha,TMP_SDF-Mobile-2-Pass-Face
+_FaceDilate,float,"hint_range(-1, 1)",0,Face dilation,TMP_SDF-Mobile-2-Pass-Face
+_OutlineColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 1.0)",Outline color and alpha,TMP_SDF-Mobile-2-Pass-Face
+_OutlineWidth,float,"hint_range(0, 1)",0,Outline thickness,TMP_SDF-Mobile-2-Pass-Face
+_OutlineSoftness,float,"hint_range(0, 1)",0,Outline softness,TMP_SDF-Mobile-2-Pass-Face
+_UnderlayColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 0.5)",Underlay color and alpha,TMP_SDF-Mobile-2-Pass-Face
+_UnderlayOffsetX,float,"hint_range(-1, 1)",0,Underlay offset X,TMP_SDF-Mobile-2-Pass-Face
+_UnderlayOffsetY,float,"hint_range(-1, 1)",0,Underlay offset Y,TMP_SDF-Mobile-2-Pass-Face
+_UnderlayDilate,float,"hint_range(-1, 1)",0,Underlay dilation,TMP_SDF-Mobile-2-Pass-Face
+_UnderlaySoftness,float,"hint_range(0, 1)",0,Underlay softness,TMP_SDF-Mobile-2-Pass-Face
+_WeightNormal,float,-,0,Font weight normal,TMP_SDF-Mobile-2-Pass-Face
+_WeightBold,float,-,0.5,Font weight bold,TMP_SDF-Mobile-2-Pass-Face
+_ScaleRatioA,float,-,1,Scale ratio A,TMP_SDF-Mobile-2-Pass-Face
+_ScaleRatioB,float,-,1,Scale ratio B,TMP_SDF-Mobile-2-Pass-Face
+_ScaleRatioC,float,-,1,Scale ratio C,TMP_SDF-Mobile-2-Pass-Face
+_ScaleX,float,-,1,Scale X,TMP_SDF-Mobile-2-Pass-Face
+_ScaleY,float,-,1,Scale Y,TMP_SDF-Mobile-2-Pass-Face
+_PerspectiveFilter,float,"hint_range(0, 1)",0.875,Perspective correction,TMP_SDF-Mobile-2-Pass-Face
+_Sharpness,float,"hint_range(-1, 1)",0,Sharpness adjustment,TMP_SDF-Mobile-2-Pass-Face
+_VertexOffsetX,float,-,0,Vertex offset X,TMP_SDF-Mobile-2-Pass-Face
+_VertexOffsetY,float,-,0,Vertex offset Y,TMP_SDF-Mobile-2-Pass-Face
+_ClipRect,vec4,-,"vec4(-32767, -32767, 32767, 32767)",Clipping rectangle,TMP_SDF-Mobile-2-Pass-Face
+_MaskSoftnessX,float,-,0,Mask softness X,TMP_SDF-Mobile-2-Pass-Face
+_MaskSoftnessY,float,-,0,Mask softness Y,TMP_SDF-Mobile-2-Pass-Face
+_StencilComp,float,-,8,Stencil comparison,TMP_SDF-Mobile-2-Pass-Face
+_Stencil,float,-,0,Stencil ID,TMP_SDF-Mobile-2-Pass-Face
+_StencilOp,float,-,0,Stencil operation,TMP_SDF-Mobile-2-Pass-Face
+_StencilWriteMask,float,-,255,Stencil write mask,TMP_SDF-Mobile-2-Pass-Face
+_StencilReadMask,float,-,255,Stencil read mask,TMP_SDF-Mobile-2-Pass-Face
+_CullMode,float,-,0,Cull mode,TMP_SDF-Mobile-2-Pass-Face
+_ColorMask,float,-,15,Color mask,TMP_SDF-Mobile-2-Pass-Face
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 0.0)",Primary color,two_tone_color_unlit
+_Color2,vec4,hint_color,"vec4(0.6509434, 0.6509434, 0.6509434, 0.0)",Secondary color,two_tone_color_unlit
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 0.0)",Primary color,two_tone_transparent_color_unlit
+_Color2,vec4,hint_color,"vec4(0.6509434, 0.6509434, 0.6509434, 0.0)",Secondary color,two_tone_transparent_color_unlit
+_AddBrightness,float,"hint_range(0.0, 1.0)",0.0,Brightness adjustment,two_tone_transparent_color_unlit
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 0.0)",Primary color,two_tone_color_unlit_opacity
+_Color2,vec4,hint_color,"vec4(0.6509434, 0.6509434, 0.6509434, 0.0)",Secondary color,two_tone_color_unlit_opacity
+_Texture2D,sampler2D,hint_albedo,-,Base texture,house_texture_lit
+_BaseColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Base color tint,house_texture_lit
+_TextureAlpha,float,"hint_range(0.0, 1.0)",1.0,Texture alpha multiplier,house_texture_lit
+_Tiling,vec2,-,"vec2(1.0, 1.0)",Texture tiling,house_texture_lit
+_Offset,vec2,-,"vec2(0.0, 0.0)",Texture offset,house_texture_lit
+_BaseColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Base color,house_texture_unlit
+_BaseMap,sampler2D,hint_albedo,-,Base texture map,house_texture_unlit
+_Tiling,vec2,-,"vec2(1.0, 1.0)",Texture tiling,house_texture_unlit
+_Offset,vec2,-,"vec2(0.0, 0.0)",Texture offset,house_texture_unlit
+_BaseMap,sampler2D,hint_albedo,-,Base texture,triplanar_lit
+_BaseColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Base color tint,triplanar_lit
+_BumpMap,sampler2D,hint_normal,-,Normal map,triplanar_lit
+_Scale,float,"hint_range(0, 3)",1.0,Normal map scale,triplanar_lit
+_Smoothness,float,"hint_range(0, 1)",0.5,Surface smoothness,triplanar_lit
+_Metallic,float,"hint_range(0, 1)",0.0,Metallic property,triplanar_lit
+_SpecColor,vec4,hint_color,"vec4(0.502, 0.502, 0.502, 1.0)",Specular color,triplanar_lit
+_EmissionMap,sampler2D,hint_black,-,Emission map,triplanar_lit
+_EmissionColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 0.0)",Emission color,triplanar_lit
+_Tilling,float,-,1.0,Texture tiling,triplanar_lit
+_Blending,float,-,1.0,Triplanar blending,triplanar_lit
+_Hue,float,"hint_range(0, 360)",0.0,Hue adjustment,triplanar_lit
+_Saturation,float,"hint_range(0, 1)",1.0,Saturation adjustment,triplanar_lit
+_Contrast,float,"hint_range(0, 1)",1.0,Contrast adjustment,triplanar_lit
+_Occlusion,float,-,1.0,Occlusion strength,triplanar_lit
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 0.0)",Primary color,divider
+_Color2,vec4,hint_color,"vec4(0.6509434, 0.6509434, 0.6509434, 0.0)",Secondary color,divider
+_AddBrightness,float,"hint_range(0.0, 1.0)",0.0,Brightness adjustment,divider
+_GhostLight,bool,hint_toggle,false,Enable ghost lighting effect,divider
+_GhostLightSpeed,float,"hint_range(0.0, 1.0)",3.0,Ghost light animation speed,divider
+_GhostLightColor,vec4,hint_color,"vec4(0.25, 0.5056235, 1.0, 0.0)",Ghost light color,divider
+_BackgroundColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Background color,edit_mode_grid
+_GridColor,vec4,hint_color,"vec4(0.509434, 0.509434, 0.509434, 1.0)",Grid line color,edit_mode_grid
+_GridUnit,vec2,-,"vec2(0.4, 0.4)",Grid unit size,edit_mode_grid
+_GridThickness,float,"hint_range(0.0, 1.0)",0.1,Main grid thickness,edit_mode_grid
+_SubGridThickness,float,"hint_range(0.0, 1.0)",0.1,Sub-grid thickness,edit_mode_grid
+_SubGridDivider,float,"hint_range(0.0, 1.0)",2.0,Sub-grid division,edit_mode_grid
+_GridFinalAlpha,float,"hint_range(0.0, 1.0)",1.0,Grid final alpha,edit_mode_grid
+_GridIndicatorSizeMultiplier,float,-,2.0,Grid indicator size multiplier,edit_mode_grid
+_GridIndicatorSoftness,float,"hint_range(0.0, 1.0)",0.3,Grid indicator softness,edit_mode_grid
+_GridIndicatorColor0,vec4,hint_color,"vec4(1.0, 0.0, 0.0, 0.0)",Grid indicator color 0,edit_mode_grid
+_GridIndicatorColor1,vec4,hint_color,"vec4(0.0, 0.0, 1.0, 0.0)",Grid indicator color 1,edit_mode_grid
+_GridIndicatorGhostAlphaSpeed,float,-,3.0,Grid indicator ghost alpha speed,edit_mode_grid
+_MainTex,sampler2D,hint_albedo,-,Main texture,sprite_color
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Color tint,sprite_color
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Primary color,wall_render_outer
+_Color2,vec4,hint_color,"vec4(0.6509434, 0.6509434, 0.6509434, 0.0)",Secondary color,wall_render_outer
+_LightIntensity,float,"hint_range(0.0, 2.0)",1.0,Light intensity multiplier,wall_render_outer
+_GhostLight,bool,hint_toggle,false,Enable ghost lighting effect,wall_render_outer
+_GhostLightSpeed,float,"hint_range(0.1, 10.0)",3.0,Ghost light animation speed,wall_render_outer
+_GhostLightColor,vec4,hint_color,"vec4(0.25, 0.5056235, 1.0, 0.0)",Ghost light color,wall_render_outer
+_WorkflowMode,float,"hint_range(0, 1)",1.0,"Workflow mode (0=Specular, 1=Metallic)",character_lit
+_BaseMap,sampler2D,hint_albedo,-,Base texture,character_lit
+_BaseColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Base color tint,character_lit
+_Cutoff,float,"hint_range(0.0, 1.0)",0.5,Alpha cutoff threshold,character_lit
+_Smoothness,float,"hint_range(0.0, 1.0)",0.5,Surface smoothness,character_lit
+_SmoothnessTextureChannel,float,"hint_range(0.0, 1.0)",0.0,Smoothness texture channel,character_lit
+_Metallic,float,"hint_range(0.0, 1.0)",0.0,Metallic property,character_lit
+_MetallicGlossMap,sampler2D,hint_white,-,Metallic gloss map,character_lit
+_SpecColor,vec4,hint_color,"vec4(0.2, 0.2, 0.2, 1.0)",Specular color,character_lit
+_SpecGlossMap,sampler2D,hint_white,-,Specular gloss map,character_lit
+_SpecularHighlights,bool,hint_toggle,true,Enable specular highlights,character_lit
+_EnvironmentReflections,bool,hint_toggle,true,Enable environment reflections,character_lit
+_BumpScale,float,"hint_range(0.0, 2.0)",1.0,Normal map scale,character_lit
+_BumpMap,sampler2D,hint_normal,-,Normal map,character_lit
+_Parallax,float,"hint_range(0.005, 0.08)",0.005,Parallax strength,character_lit
+_ParallaxMap,sampler2D,hint_black,-,Parallax map,character_lit
+_OcclusionStrength,float,"hint_range(0.0, 1.0)",1.0,Occlusion strength,character_lit
+_OcclusionMap,sampler2D,hint_white,-,Occlusion map,character_lit
+_EmissionColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 1.0)",Emission color,character_lit
+_EmissionMap,sampler2D,hint_white,-,Emission map,character_lit
+_DetailMask,sampler2D,hint_white,-,Detail mask,character_lit
+_DetailAlbedoMapScale,float,"hint_range(0.0, 2.0)",1.0,Detail albedo map scale,character_lit
+_DetailAlbedoMap,sampler2D,hint_albedo,-,Detail albedo map,character_lit
+_DetailNormalMapScale,float,"hint_range(0.0, 2.0)",1.0,Detail normal map scale,character_lit
+_DetailNormalMap,sampler2D,hint_normal,-,Detail normal map,character_lit
+_AlphaClip,bool,hint_toggle,false,Enable alpha clipping,character_lit
+_ReceiveShadows,bool,hint_toggle,true,Enable shadow receiving,character_lit
+_MainTex,sampler2D,hint_albedo,-,Main texture,two_layered_lit
+_IconColor,vec4,hint_color,"vec4(0.792, 0.792, 0.792, 0.0)",Icon color tint,two_layered_lit
+_BGTex,sampler2D,hint_albedo,-,Background texture,two_layered_lit
+_Color,vec4,hint_color,"vec4(0.823, 0.823, 0.823, 0.0)",Background color tint,two_layered_lit
+_Metallic,float,"hint_range(0.0, 1.0)",0.3,Background metallic,two_layered_lit
+_Glossiness,float,"hint_range(0.0, 1.0)",0.9,Background glossiness,two_layered_lit
+_IconMetallic,float,"hint_range(0.0, 1.0)",0.0,Icon metallic,two_layered_lit
+_IconGlossiness,float,"hint_range(0.0, 1.0)",0.0,Icon glossiness,two_layered_lit
+_BaseColor,vec4,hint_color,"vec4(0.643, 0.643, 0.643, 1.0)",Base color tint,block_3d
+_BaseMap,sampler2D,hint_albedo,-,Base texture,block_3d
+_LambertAmount,float,"hint_range(0.0, 1.0)",0.5,Lambert lighting amount,block_3d
+_ColorBrightness,float,"hint_range(0.0, 2.0)",1.0,Color brightness,block_3d
+_Color2Darkness,float,"hint_range(0.0, 1.0)",0.0,Secondary color darkness,block_3d
+_AlbedoBrightness,float,"hint_range(0.0, 1.0)",0.0,Albedo brightness,block_3d
+_GhostLight,bool,hint_toggle,false,Enable ghost lighting effect,block_3d
+_GhostLightSpeed,float,"hint_range(0.0, 1.0)",1.0,Ghost light animation speed,block_3d
+_GhostLightColor,vec4,hint_color,"vec4(0.25, 0.5056, 1.0, 0.0)",Ghost light color,block_3d
+_Alpha,float,-,1.0,Alpha multiplier,block_3d
+_Color,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 0.0)",Progress color,device_progress
+_ClockWise,bool,hint_toggle,false,Clockwise direction,device_progress
+_Rotation,float,"hint_range(0.0, 1.0)",0.0,Rotation amount,device_progress
+_TrimStart,float,"hint_range(0.0, 1.0)",180.0,Trim start angle,device_progress
+_Length,float,"hint_range(0.0, 1.0)",0.15,Progress length,device_progress
+_Offset,float,-,0.0,Progress offset,device_progress
+_MainTex,sampler2D,hint_albedo,-,Main texture,sprite_color_zwrite
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Color tint,sprite_color_zwrite
+_MainTex,sampler2D,hint_albedo,-,Main texture,sprite_icon_unlit
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Color tint,sprite_icon_unlit
+_HorizontalFlip,bool,hint_toggle,false,Horizontal flip toggle,sprite_icon_unlit
+_GradientTexture,sampler2D,hint_black_albedo,-,Gradient color texture,heatmap_box_stenciled
+_BaseIntensity,float,"hint_range(0.0, 1.0)",0.0,Base intensity value,heatmap_box_stenciled
+_DitheringRadius,float,"hint_range(0.0, 1.0)",0.5,Dithering radius,heatmap_box_stenciled
+_CutRange,vec2,-,"vec2(0.0, 0.2)",Intensity cut range,heatmap_box_stenciled
+_BaseRadius,float,-,0.0,Base radius,heatmap_box_stenciled
+_BaseOpacity,float,"hint_range(0.0, 1.0)",1.0,Base opacity,heatmap_box_stenciled
+_BlendColorRatio,float,"hint_range(0.0, 1.0)",0.0,Color blend ratio,heatmap_box_stenciled
+_BlendOverlaySceneOpacity,float,"hint_range(0.0, 1.0)",0.0,Scene overlay opacity,heatmap_box_stenciled
+_BlendOverlaySceneRatio,float,"hint_range(0.0, 1.0)",0.0,Scene blend ratio,heatmap_box_stenciled
+_BlendOverlayGaussianCoef,float,"hint_range(0.0, 1.0)",0.0,Gaussian coefficient,heatmap_box_stenciled
+_BlendOverlayGaussianBase,float,"hint_range(0.0, 1.0)",0.0,Gaussian base value,heatmap_box_stenciled
+_BlendOverlayGaussianOpacity,float,"hint_range(0.0, 1.0)",0.0,Gaussian opacity,heatmap_box_stenciled
+_BlendOverlayGaussianRatio,float,"hint_range(0.0, 1.0)",0.0,Gaussian blend ratio,heatmap_box_stenciled
+_BlendOverlayWhiteOpacity,float,"hint_range(0.0, 1.0)",0.0,White overlay opacity,heatmap_box_stenciled
+_InterestOpacityRange,vec2,-,"vec2(0.0, 0.2)",Interest opacity range,heatmap_box_stenciled
+_InterestOpacityUseGaussian,bool,hint_toggle,false,Use Gaussian for interest,heatmap_box_stenciled
+_InterestOpacityGaussianCoef,float,"hint_range(0.0, 1.0)",0.0,Interest Gaussian coefficient,heatmap_box_stenciled
+_InterestOpacityRatio,float,"hint_range(0.0, 1.0)",0.0,Interest opacity ratio,heatmap_box_stenciled
+attractors,struct array,-,N/A,Heatmap attractor data,heatmap_box_stenciled
+attractor_count,int,-,0,Number of attractors,heatmap_box_stenciled
+_Color,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Primary color,wall_render_outer_side
+_Color2,vec4,hint_color,"vec4(0.6509434, 0.6509434, 0.6509434, 0.0)",Secondary color,wall_render_outer_side
+_LightIntensity,float,"hint_range(0.0, 2.0)",1.0,Light intensity multiplier,wall_render_outer_side
+_GhostLight,bool,hint_toggle,false,Enable ghost lighting effect,wall_render_outer_side
+_GhostLightSpeed,float,"hint_range(0.1, 10.0)",3.0,Ghost light animation speed,wall_render_outer_side
+_GhostLightColor,vec4,hint_color,"vec4(0.25, 0.5056235, 1.0, 0.0)",Ghost light color,wall_render_outer_side

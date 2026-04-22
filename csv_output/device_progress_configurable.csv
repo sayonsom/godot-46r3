@@ -1,0 +1,7 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_Color,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 0.0)",Progress color
+_ClockWise,bool,hint_toggle,false,Clockwise direction
+_Rotation,float,"hint_range(0.0, 1.0)",0.0,Rotation amount
+_TrimStart,float,"hint_range(0.0, 1.0)",180.0,Trim start angle
+_Length,float,"hint_range(0.0, 1.0)",0.15,Progress length
+_Offset,float,-,0.0,Progress offset

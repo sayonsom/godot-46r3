@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://fc234s2shjfk"
+
+[deps]
+
+files=["res://csv_output/TMP_SDF-Mobile-2-Pass-Outline_fixed.Value.translation", "res://csv_output/TMP_SDF-Mobile-2-Pass-Outline_fixed.Description.translation"]
+
+source_file="res://csv_output/TMP_SDF-Mobile-2-Pass-Outline_fixed.csv"
+dest_files=["res://csv_output/TMP_SDF-Mobile-2-Pass-Outline_fixed.Value.translation", "res://csv_output/TMP_SDF-Mobile-2-Pass-Outline_fixed.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

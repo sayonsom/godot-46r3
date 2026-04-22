@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b1gjfkfbn4egj"
+
+[deps]
+
+files=["res://csv_output/SpriteOpaque_configurable.Type.translation", "res://csv_output/SpriteOpaque_configurable.Range/Hint.translation", "res://csv_output/SpriteOpaque_configurable.Default Value.translation", "res://csv_output/SpriteOpaque_configurable.Description.translation"]
+
+source_file="res://csv_output/SpriteOpaque_configurable.csv"
+dest_files=["res://csv_output/SpriteOpaque_configurable.Type.translation", "res://csv_output/SpriteOpaque_configurable.Range/Hint.translation", "res://csv_output/SpriteOpaque_configurable.Default Value.translation", "res://csv_output/SpriteOpaque_configurable.Description.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

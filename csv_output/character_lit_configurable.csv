@@ -1,0 +1,28 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_WorkflowMode,float,"hint_range(0, 1)",1.0,"Workflow mode (0=Specular, 1=Metallic)"
+_BaseMap,sampler2D,hint_albedo,-,Base texture
+_BaseColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Base color tint
+_Cutoff,float,"hint_range(0.0, 1.0)",0.5,Alpha cutoff threshold
+_Smoothness,float,"hint_range(0.0, 1.0)",0.5,Surface smoothness
+_SmoothnessTextureChannel,float,"hint_range(0.0, 1.0)",0.0,Smoothness texture channel
+_Metallic,float,"hint_range(0.0, 1.0)",0.0,Metallic property
+_MetallicGlossMap,sampler2D,hint_white,-,Metallic gloss map
+_SpecColor,vec4,hint_color,"vec4(0.2, 0.2, 0.2, 1.0)",Specular color
+_SpecGlossMap,sampler2D,hint_white,-,Specular gloss map
+_SpecularHighlights,bool,hint_toggle,true,Enable specular highlights
+_EnvironmentReflections,bool,hint_toggle,true,Enable environment reflections
+_BumpScale,float,"hint_range(0.0, 2.0)",1.0,Normal map scale
+_BumpMap,sampler2D,hint_normal,-,Normal map
+_Parallax,float,"hint_range(0.005, 0.08)",0.005,Parallax strength
+_ParallaxMap,sampler2D,hint_black,-,Parallax map
+_OcclusionStrength,float,"hint_range(0.0, 1.0)",1.0,Occlusion strength
+_OcclusionMap,sampler2D,hint_white,-,Occlusion map
+_EmissionColor,vec4,hint_color,"vec4(0.0, 0.0, 0.0, 1.0)",Emission color
+_EmissionMap,sampler2D,hint_white,-,Emission map
+_DetailMask,sampler2D,hint_white,-,Detail mask
+_DetailAlbedoMapScale,float,"hint_range(0.0, 2.0)",1.0,Detail albedo map scale
+_DetailAlbedoMap,sampler2D,hint_albedo,-,Detail albedo map
+_DetailNormalMapScale,float,"hint_range(0.0, 2.0)",1.0,Detail normal map scale
+_DetailNormalMap,sampler2D,hint_normal,-,Detail normal map
+_AlphaClip,bool,hint_toggle,false,Enable alpha clipping
+_ReceiveShadows,bool,hint_toggle,true,Enable shadow receiving

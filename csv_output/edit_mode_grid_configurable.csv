@@ -1,0 +1,13 @@
+Uniform Name,Type,Range/Hint,Default Value,Description
+_BackgroundColor,vec4,hint_color,"vec4(1.0, 1.0, 1.0, 1.0)",Background color
+_GridColor,vec4,hint_color,"vec4(0.509434, 0.509434, 0.509434, 1.0)",Grid line color
+_GridUnit,vec2,-,"vec2(0.4, 0.4)",Grid unit size
+_GridThickness,float,"hint_range(0.0, 1.0)",0.1,Main grid thickness
+_SubGridThickness,float,"hint_range(0.0, 1.0)",0.1,Sub-grid thickness
+_SubGridDivider,float,"hint_range(0.0, 1.0)",2.0,Sub-grid division
+_GridFinalAlpha,float,"hint_range(0.0, 1.0)",1.0,Grid final alpha
+_GridIndicatorSizeMultiplier,float,-,2.0,Grid indicator size multiplier
+_GridIndicatorSoftness,float,"hint_range(0.0, 1.0)",0.3,Grid indicator softness
+_GridIndicatorColor0,vec4,hint_color,"vec4(1.0, 0.0, 0.0, 0.0)",Grid indicator color 0
+_GridIndicatorColor1,vec4,hint_color,"vec4(0.0, 0.0, 1.0, 0.0)",Grid indicator color 1
+_GridIndicatorGhostAlphaSpeed,float,-,3.0,Grid indicator ghost alpha speed
