@@ -3,6 +3,11 @@ extends Node3D
 const DEVICE_PIN_SCENE := preload("res://scenes/device_pin.tscn")
 const DUST_PUFF_DRAMATIC_SCENE := preload("res://scenes/vfx/dust_puff_dramatic.tscn")
 const DUST_PUFF_SCENE := preload("res://scenes/vfx/dust_puff.tscn")
+const SHADER_WALL_MATERIAL_UNLIT := preload("res://shaders/wall_material_unlit.gdshader")
+const SHADER_FLOOR_MATERIAL_UNLIT := preload("res://shaders/floor_material_unlit.gdshader")
+const SHADER_FURNITURE_DUAL_TONE_UNLIT := preload("res://shaders/furniture_dual_tone_unlit.gdshader")
+# Flip to false to restore the default lit pipeline. On-device preview flag.
+const SHADER_PREVIEW_UNLIT_PACK_ENABLED := true
 const FLOOR_PLAN_PATH := "res://data/sample_floor_plan.json"
 const FLOOR_FINISH_STATE_PATH := "user://floor_finish_state.cfg"
 const FLOOR_PLAN_SCALE := 0.04
@@ -1203,8 +1208,133 @@ func _connect_app_plugin() -> void:
 		_app_plugin_connected = true
 
 
-func _on_shader_selection_changed(_payload: String) -> void:
-	pass
+func _on_shader_selection_changed(payload: String) -> void:
+	var id := payload.strip_edges()
+	if id == "unlit_pack":
+		_apply_unlit_shader_pack(true)
+	elif id == "unlit_pack_off" or id == "default":
+		_apply_unlit_shader_pack(false)
+
+
+func _apply_unlit_shader_pack(enabled: bool) -> void:
+	print("[SmartHome] _apply_unlit_shader_pack -> %s" % enabled)
+	if not enabled:
+		for room_entry in _room_entries:
+			var finish_id := String(room_entry.get("finish_id", _default_finish_for_room(room_entry)))
+			_render_room_finish(room_entry, finish_id)
+		for wall_entry in _wall_tint_entries:
+			var wall_mesh := wall_entry.get("mesh", null) as MeshInstance3D
+			if not is_instance_valid(wall_mesh):
+				continue
+			var is_exterior := bool(wall_entry.get("is_exterior", false))
+			var tint := _wall_tint_for_room_ids(wall_entry.get("room_ids", []) as Array, is_exterior)
+			wall_mesh.material_override = _make_wall_material(is_exterior, tint)
+		for root in _furniture_roots:
+			if not is_instance_valid(root):
+				continue
+			var cached := root.get_meta("furniture_lit_materials", {}) as Dictionary
+			for mesh_path_key in cached.keys():
+				var mesh_path := String(mesh_path_key)
+				var mesh_node := root.get_node_or_null(mesh_path)
+				if mesh_node is MeshInstance3D:
+					(mesh_node as MeshInstance3D).material_override = cached[mesh_path_key]
+		return
+
+	var floor_color_default := Color(0.90, 0.88, 0.84, 1.0)
+	var floor_accent := Color(0.82, 0.80, 0.76, 1.0)
+	for floor_node in _floor_nodes:
+		if not is_instance_valid(floor_node):
+			continue
+		var finish := floor_node.material_override as BaseMaterial3D
+		var base_color: Color = floor_color_default
+		if finish != null and finish is StandardMaterial3D:
+			base_color = (finish as StandardMaterial3D).albedo_color
+			base_color.a = 1.0
+		var accent := base_color.darkened(0.08)
+		accent.a = 1.0
+		var mat := ShaderMaterial.new()
+		mat.shader = SHADER_FLOOR_MATERIAL_UNLIT
+		mat.set_shader_parameter("base_color", base_color)
+		# Push accent to a darker, more saturated version so the pattern is obvious.
+		mat.set_shader_parameter("accent_color", Color(base_color.r * 0.55, base_color.g * 0.55, base_color.b * 0.55, 1.0))
+		mat.set_shader_parameter("pattern_mode", 2) # stripes
+		mat.set_shader_parameter("pattern_strength", 0.70)
+		mat.set_shader_parameter("uv_tiling", Vector2(10.0, 10.0))
+		mat.set_shader_parameter("edge_vignette", 0.35)
+		mat.set_shader_parameter("grain_strength", 0.08)
+		mat.set_shader_parameter("grain_scale", 120.0)
+		mat.set_shader_parameter("alpha", 1.0)
+		floor_node.material_override = mat
+
+	for wall_entry in _wall_tint_entries:
+		var wall_mesh := wall_entry.get("mesh", null) as MeshInstance3D
+		if not is_instance_valid(wall_mesh):
+			continue
+		var is_exterior := bool(wall_entry.get("is_exterior", false))
+		var tint := _wall_tint_for_room_ids(wall_entry.get("room_ids", []) as Array, is_exterior)
+		var base_color := EXTERIOR_WALL_COLOR if is_exterior else Color(tint.r, tint.g, tint.b, 1.0)
+		# High-contrast preview tuning: pick a saturated accent that's clearly
+		# different from the base so the shader effect is obvious against the
+		# near-matte StandardMaterial3D baseline.
+		var accent := Color(0.18, 0.22, 0.32, 1.0) if is_exterior else Color(0.52, 0.34, 0.56, 1.0)
+		var wall_mat := ShaderMaterial.new()
+		wall_mat.shader = SHADER_WALL_MATERIAL_UNLIT
+		wall_mat.set_shader_parameter("base_color", base_color)
+		wall_mat.set_shader_parameter("accent_color", accent)
+		wall_mat.set_shader_parameter("accent_mix", 0.85)
+		wall_mat.set_shader_parameter("tone_bias", 0.75)
+		wall_mat.set_shader_parameter("vertical_gradient", 0.85)
+		wall_mat.set_shader_parameter("grain_strength", 0.18)
+		wall_mat.set_shader_parameter("grain_scale", 38.0)
+		wall_mat.set_shader_parameter("ambient_darken", 0.45)
+		wall_mat.set_shader_parameter("alpha", 1.0)
+		wall_mesh.material_override = wall_mat
+
+	for root in _furniture_roots:
+		if not is_instance_valid(root):
+			continue
+		if not root.has_meta("furniture_lit_materials"):
+			root.set_meta("furniture_lit_materials", {})
+		var cache := root.get_meta("furniture_lit_materials", {}) as Dictionary
+		var room_color := root.get_meta("furniture_room_color", Color(0.84, 0.86, 0.92)) as Color
+		# High-contrast dual-tone: bright top, deep side, saturated accent.
+		var top_color := Color(
+			clamp(room_color.r * 1.15 + 0.12, 0.0, 1.0),
+			clamp(room_color.g * 1.15 + 0.12, 0.0, 1.0),
+			clamp(room_color.b * 1.15 + 0.12, 0.0, 1.0),
+			1.0
+		)
+		var side_color := Color(room_color.r * 0.35, room_color.g * 0.35, room_color.b * 0.40, 1.0)
+		var accent_color := Color(0.95, 0.55, 0.22, 1.0)
+		var body_overlay: Node = root.get_meta("furniture_body_overlay", null) as Node
+		for child in _collect_mesh_instances(root):
+			if child == body_overlay:
+				continue
+			if not cache.has(root.get_path_to(child)):
+				cache[root.get_path_to(child)] = child.material_override
+			var fmat := ShaderMaterial.new()
+			fmat.shader = SHADER_FURNITURE_DUAL_TONE_UNLIT
+			fmat.set_shader_parameter("top_color", top_color)
+			fmat.set_shader_parameter("side_color", side_color)
+			fmat.set_shader_parameter("accent_color", accent_color)
+			fmat.set_shader_parameter("side_softness", 0.12)
+			fmat.set_shader_parameter("accent_strength", 0.65)
+			fmat.set_shader_parameter("rim_strength", 0.55)
+			fmat.set_shader_parameter("shadow_wrap", 0.55)
+			fmat.set_shader_parameter("color_brightness", 1.0)
+			fmat.set_shader_parameter("alpha", 1.0)
+			fmat.set_shader_parameter("alpha_clip", 0.05)
+			child.material_override = fmat
+		root.set_meta("furniture_lit_materials", cache)
+
+
+func _collect_mesh_instances(root: Node) -> Array:
+	var out: Array = []
+	if root is MeshInstance3D:
+		out.append(root)
+	for child in root.get_children():
+		out.append_array(_collect_mesh_instances(child))
+	return out
 
 
 func _on_furniture_selection_changed(model_id: String) -> void:
@@ -1486,6 +1616,8 @@ func _build_floor_plan() -> void:
 
 	_populate_objects(floor)
 	_home_pivot.rotation_degrees.y = BASE_PLAN_ROTATION_Y
+	if SHADER_PREVIEW_UNLIT_PACK_ENABLED:
+		_apply_unlit_shader_pack(true)
 
 
 func _add_foundation() -> void:
