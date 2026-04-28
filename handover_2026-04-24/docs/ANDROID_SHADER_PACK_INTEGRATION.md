@@ -5,6 +5,7 @@ Revision date: 2026-04-24
 This guide supersedes the previous integration doc. It covers both the original generated shader pack **and** the three new non-reflective shaders added in this drop:
 
 - `wall_material_unlit.gdshader`
+- `wall_material_dither_unlit.gdshader` *(non-compounding see-through wall — added late drop)*
 - `floor_material_unlit.gdshader`
 - `furniture_dual_tone_unlit.gdshader`
 
@@ -17,6 +18,7 @@ Everything in this guide has been validated on a Samsung SM-S921B running the re
 | File | Role | Lit? | Render mode |
 |---|---|---|---|
 | `shaders/wall_material_unlit.gdshader` | Non-reflective wall paint | No | `blend_mix, depth_draw_opaque, cull_back, unshaded, specular_disabled` |
+| `shaders/wall_material_dither_unlit.gdshader` | See-through wall whose opacity does **not** compound through multiple walls | No | `depth_draw_opaque, cull_back, unshaded, specular_disabled` (dithered discard, no blend) |
 | `shaders/floor_material_unlit.gdshader` | Non-reflective floor colour + optional pattern | No | `blend_mix, depth_draw_opaque, cull_back, unshaded, specular_disabled` |
 | `shaders/furniture_dual_tone_unlit.gdshader` | Dual-tone furniture colouring (top / side) | No | `blend_mix, depth_draw_opaque, cull_back, unshaded, specular_disabled` |
 
@@ -50,7 +52,8 @@ wall_render_outer_side        // legacy lit wall (side)
 floor_pattern                 // legacy lit floor
 furniture_two_tone_lit        // legacy lit furniture
 
-wall_material_unlit           // NEW non-reflective wall
+wall_material_unlit           // NEW non-reflective wall (alpha-blended)
+wall_material_dither_unlit    // NEW non-compounding see-through wall (dithered)
 floor_material_unlit          // NEW non-reflective floor
 furniture_dual_tone_unlit     // NEW non-reflective dual-tone furniture
 ```
@@ -81,6 +84,39 @@ Recommended production ranges:
 - `accent_mix` 0.2–0.4
 - `vertical_gradient` 0.15–0.35
 - `grain_strength` 0.02–0.06
+
+### 4.1b `wall_material_dither_unlit`
+
+Same shading equation as `wall_material_unlit`, but uses **screen-space Bayer
+dither + opaque depth writes** instead of alpha blending. The result: a piece
+of furniture seen through 1 wall, 2 walls, or 5 walls all looks identical.
+Edge cases (corners where two walls overlap on screen) also stay flat — no
+darker rim where walls cross.
+
+| Uniform | Type | Range | Default | Notes |
+|---|---|---|---|---|
+| `base_color` | `vec4` | `source_color` | `(0.94, 0.93, 0.90, 1.0)` | Primary wall colour. |
+| `accent_color` | `vec4` | `source_color` | `(0.78, 0.76, 0.72, 1.0)` | Tilted-facet accent. |
+| `accent_mix` | `float` | 0.0–1.0 | `0.35` | Accent strength. |
+| `tone_bias` | `float` | 0.0–1.0 | `0.45` | Side-zone width. |
+| `vertical_gradient` | `float` | 0.0–1.0 | `0.25` | Top-to-bottom darkening. |
+| `ambient_darken` | `float` | 0.0–0.6 | `0.18` | Bottom darkening. |
+| `opacity` | `float` | 0.0–1.0 | `0.6` | Fraction of pixels drawn (binary, screen-space). |
+| `dither_mode` | `int` | 0, 1, 2 | `1` | 0 = Bayer 4×4, 1 = Bayer 8×8, 2 = hashed (least pattern). |
+
+Production guidance:
+- Use this for **interior walls** that the front-wall cutaway logic sometimes
+  has to leave standing (corners, cross walls behind a foreground wall).
+- `opacity` 0.5–0.7 reads as a clear "you can see through me" wall without
+  obscuring the furniture behind. The exact value can stay constant across
+  the whole house — it does not need to scale down with the number of walls.
+- Prefer `dither_mode = 1` (Bayer 8×8) for the cleanest look on Android
+  panels. Bayer 4×4 (mode 0) shows visible dot pattern; hashed (mode 2) is
+  noisy but has no banding.
+- Because depth is written, **shadows / depth-based effects work normally**
+  through the visible pixels of the wall, but pass straight through the
+  discarded pixels.
+- MSAA is friendly to this shader — the dither resolves at sub-pixel scale.
 
 ### 4.2 `floor_material_unlit`
 
@@ -270,6 +306,7 @@ handover_2026-04-24/
 ├── README.md
 ├── shaders/
 │   ├── wall_material_unlit.gdshader
+│   ├── wall_material_dither_unlit.gdshader
 │   ├── floor_material_unlit.gdshader
 │   └── furniture_dual_tone_unlit.gdshader
 ├── docs/
