@@ -10,6 +10,7 @@ Three hand-authored unlit shaders that give the developer a stable, brand-safe
 way to colour walls, floors, and furniture without any lighting dependency:
 
 - `shaders/wall_material_unlit.gdshader`
+- `shaders/wall_material_dither_unlit.gdshader` — **non-compounding** see-through wall
 - `shaders/floor_material_unlit.gdshader`
 - `shaders/furniture_dual_tone_unlit.gdshader`
 
@@ -33,6 +34,7 @@ steady 60 FPS.
 
 ```
 wall_material_unlit
+wall_material_dither_unlit
 floor_material_unlit
 furniture_dual_tone_unlit
 ```
@@ -44,6 +46,7 @@ handover_2026-04-24/
 ├── README.md                                   ← this file
 ├── shaders/
 │   ├── wall_material_unlit.gdshader
+│   ├── wall_material_dither_unlit.gdshader
 │   ├── floor_material_unlit.gdshader
 │   └── furniture_dual_tone_unlit.gdshader
 ├── docs/
