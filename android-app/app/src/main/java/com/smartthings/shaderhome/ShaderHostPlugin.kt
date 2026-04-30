@@ -49,6 +49,20 @@ class ShaderHostPlugin(
             savingsCost: Double,
         )
 
+        /**
+         * Called whenever Godot publishes a new accessibility tree. The JSON
+         * follows the schema documented on
+         * [com.smartthings.shaderhome.accessibility.AccessibilityTree.fromJson].
+         * Always invoked on the UI thread.
+         */
+        fun onAccessibilityTreeUpdated(json: String)
+
+        /**
+         * Called when Godot wants TalkBack to read a transient announcement
+         * (e.g. "Light turned on"). Always invoked on the UI thread.
+         */
+        fun onAccessibilityAnnounce(text: String)
+
         fun onPluginReady()
     }
 
@@ -106,6 +120,20 @@ class ShaderHostPlugin(
             String::class.java,
             Boolean::class.javaObjectType,
         )
+
+        // --- Accessibility (TalkBack) bridge ----------------------------------
+        // Emitted from the AccessibilityOverlayView (via MainActivity) when
+        // TalkBack moves accessibility focus to or activates a virtual node.
+        // Payload: the node id (e.g. "room:<uuid>" or "device:<uuid>") that
+        // Godot already knows about because it published the tree.
+        private val ACCESSIBILITY_FOCUS_CHANGED = SignalInfo(
+            "accessibility_focus_changed",
+            String::class.java,
+        )
+        private val ACCESSIBILITY_ACTIVATE = SignalInfo(
+            "accessibility_activate",
+            String::class.java,
+        )
     }
 
     override fun getPluginName() = "SmartHomeAppPlugin"
@@ -130,6 +158,8 @@ class ShaderHostPlugin(
         FLOOR_PLAN_SESSION_APPLY_REQUESTED,
         FLOOR_PLAN_SESSION_CANCEL_REQUESTED,
         DEVICE_COMMAND_REQUESTED,
+        ACCESSIBILITY_FOCUS_CHANGED,
+        ACCESSIBILITY_ACTIVATE,
     )
 
     private var isRegistered = false
@@ -323,6 +353,62 @@ class ShaderHostPlugin(
                 savingsKwh,
                 savingsCost,
             )
+        }
+    }
+
+    // -----------------------------------------------------------------
+    // Accessibility (TalkBack) bridge
+    //
+    // Godot side (scripts/android_home.gd + scripts/accessibility_tree_builder.gd):
+    //   plugin.call("publishAccessibilityTree", json)        // tree updates
+    //   plugin.call("announceForAccessibility", "Light on")  // transient TTS
+    //
+    // Android side (AccessibilityOverlayView):
+    //   plugin.notifyAccessibilityFocus("room:<uuid>")       // TalkBack focus
+    //   plugin.notifyAccessibilityActivate("device:<uuid>")  // TalkBack click
+    // -----------------------------------------------------------------
+
+    /**
+     * Called from the AccessibilityOverlayView when TalkBack moves
+     * accessibility focus to a virtual node. The id is the same id Godot
+     * published in the tree — typically "app", "floor:<name>", "room:<uuid>"
+     * or "device:<uuid>".
+     */
+    fun notifyAccessibilityFocus(nodeId: String) {
+        emitSignal(ACCESSIBILITY_FOCUS_CHANGED.name, nodeId)
+    }
+
+    /**
+     * Called from the AccessibilityOverlayView when TalkBack activates a
+     * virtual node (double-tap → ACTION_CLICK).
+     */
+    fun notifyAccessibilityActivate(nodeId: String) {
+        emitSignal(ACCESSIBILITY_ACTIVATE.name, nodeId)
+    }
+
+    /**
+     * Receives a fresh accessibility tree from Godot. The payload schema is
+     * documented on AccessibilityTree.fromJson — keep this method *cheap*; it
+     * just hops onto the UI thread and hands the JSON to the activity, which
+     * forwards it to the overlay view. Parsing happens there.
+     */
+    @UsedByGodot
+    fun publishAccessibilityTree(json: String) {
+        getActivity()?.runOnUiThread {
+            activityBridge?.onAccessibilityTreeUpdated(json)
+        }
+    }
+
+    /**
+     * Asks the overlay to make a polite TalkBack announcement. Use sparingly
+     * — accessibility focus traversal handles most spoken feedback already;
+     * this is for *changes* the user wouldn't otherwise hear (e.g. a device
+     * state flip triggered from another control).
+     */
+    @UsedByGodot
+    fun announceForAccessibility(text: String) {
+        getActivity()?.runOnUiThread {
+            activityBridge?.onAccessibilityAnnounce(text)
         }
     }
 }
