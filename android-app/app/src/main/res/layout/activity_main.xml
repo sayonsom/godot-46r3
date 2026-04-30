@@ -10,6 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!--
+        Transparent overlay that exposes Godot's 3D scene to TalkBack as a
+        tree of virtual views (app → floor → room → devices). Touch events
+        pass through to the Godot fragment underneath; only accessibility
+        events stop here. See AccessibilityOverlayView.kt.
+    -->
+    <com.smartthings.shaderhome.accessibility.AccessibilityOverlayView
+        android:id="@+id/accessibility_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAccessibility="yes"
+        android:contentDescription="@string/accessibility_overlay_label" />
+
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/top_controls_compose_view"
         android:layout_width="match_parent"

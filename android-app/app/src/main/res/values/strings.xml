@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Shader Home</string>
+    <string name="accessibility_overlay_label">Smart Home floorplan</string>
 </resources>

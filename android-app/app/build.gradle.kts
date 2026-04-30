@@ -150,6 +150,10 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.fragment:fragment-ktx:1.8.4")
+    // ExploreByTouchHelper for the TalkBack virtual-view tree (see
+    // accessibility/HomeExploreByTouchHelper.kt). Pulled in transitively by
+    // appcompat already; declared explicitly so the version is pinned.
+    implementation("androidx.customview:customview:1.1.0")
     implementation("org.godotengine:godot:4.6.2.stable")
 
     debugImplementation("androidx.compose.ui:ui-tooling")

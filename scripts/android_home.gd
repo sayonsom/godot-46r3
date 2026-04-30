@@ -164,6 +164,15 @@ const SIGNAL_ROOM_FINISH_CANCEL_REQUESTED := "room_finish_cancel_requested"
 const SIGNAL_FLOOR_PLAN_SESSION_APPLY_REQUESTED := "floor_plan_session_apply_requested"
 const SIGNAL_FLOOR_PLAN_SESSION_CANCEL_REQUESTED := "floor_plan_session_cancel_requested"
 const SIGNAL_DEVICE_COMMAND_REQUESTED := "device_command_requested"
+# Accessibility (TalkBack) signals — emitted by ShaderHostPlugin.kt when
+# TalkBack moves focus or activates a virtual node in the overlay.
+const SIGNAL_ACCESSIBILITY_FOCUS_CHANGED := "accessibility_focus_changed"
+const SIGNAL_ACCESSIBILITY_ACTIVATE := "accessibility_activate"
+# Preloaded so we don't depend on `class_name` registration timing during
+# project load (Godot otherwise reports "Identifier not declared in scope").
+const AccessibilityTreeBuilder := preload("res://scripts/accessibility_tree_builder.gd")
+const JAVA_METHOD_PUBLISH_ACCESSIBILITY_TREE := "publishAccessibilityTree"
+const JAVA_METHOD_ANNOUNCE_FOR_ACCESSIBILITY := "announceForAccessibility"
 const JAVA_METHOD_SHOW_DEVICE_CONTROL_POPUP := "showDeviceControlPopup"
 const JAVA_METHOD_NOTIFY_LIGHT_STATUS := "notifyLightStatus"
 const JAVA_METHOD_NOTIFY_TEMPERATURE_STATUS := "notifyTemperatureStatus"
@@ -572,6 +581,26 @@ var _camera_focus_active := false
 var _energy_focus_active := false
 var _selected_air_quality_device_id := ""
 var _app_plugin_connected := false
+# --- Accessibility / TalkBack ---
+# True once we've successfully published at least one tree, so we don't fire a
+# stale republish on every camera tick before _ready finishes setting up rooms.
+var _a11y_initial_publish_done := false
+# Debounce timer for tree republish — see _publish_accessibility_tree_debounced().
+# Single-shot, recreated on demand.
+var _a11y_publish_timer: SceneTreeTimer = null
+# The accessibility node id TalkBack last reported as focused. Used to avoid
+# redundant focus mode transitions when TalkBack briefly moves focus during
+# a tree republish.
+var _a11y_focused_node_id := ""
+# Currently published floor name (for the floor:<name> id).
+var _a11y_floor_name := ""
+# Cached transforms used to detect when the camera or pivot has moved enough
+# to warrant republishing the tree (debounced). Comparing every frame is
+# cheap; the actual JSON serialisation only runs after the 50 ms debounce.
+var _a11y_last_camera_origin := Vector3.INF
+var _a11y_last_camera_basis_x := Vector3.INF
+var _a11y_last_pivot_rotation_y := INF
+var _a11y_last_zoom_scale := -1.0
 var _world_environment: WorldEnvironment = null
 var _camera_callout_nodes := {}
 var _camera_overlay_layer: CanvasLayer = null
@@ -679,6 +708,10 @@ func _play_intro_animation() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_SIZE_CHANGED and is_instance_valid(_camera):
 		_update_camera_for_viewport()
+		# Viewport size changed → all bounds in the published a11y tree are
+		# stale. Republish so TalkBack focus rectangles realign.
+		if _a11y_initial_publish_done:
+			_publish_accessibility_tree_debounced()
 
 
 func _configure_furniture_catalog() -> void:
@@ -838,6 +871,7 @@ func _process(delta: float) -> void:
 
 	_update_zoom_spring(delta)
 	_update_camera_callout_positions()
+	_check_accessibility_camera_dirty()
 
 	if _device_pin_order.is_empty():
 		return
@@ -1204,8 +1238,17 @@ func _connect_app_plugin() -> void:
 	if plugin.has_signal(SIGNAL_DEVICE_COMMAND_REQUESTED):
 		plugin.connect(SIGNAL_DEVICE_COMMAND_REQUESTED, Callable(self, "_on_device_command_requested"))
 		had_signal = true
+	if plugin.has_signal(SIGNAL_ACCESSIBILITY_FOCUS_CHANGED):
+		plugin.connect(SIGNAL_ACCESSIBILITY_FOCUS_CHANGED, Callable(self, "_on_accessibility_focus_changed"))
+		had_signal = true
+	if plugin.has_signal(SIGNAL_ACCESSIBILITY_ACTIVATE):
+		plugin.connect(SIGNAL_ACCESSIBILITY_ACTIVATE, Callable(self, "_on_accessibility_activate"))
+		had_signal = true
 	if had_signal:
 		_app_plugin_connected = true
+	# First publish runs after the floor is built (kicked off from _ready) —
+	# trigger one now in case the plugin connected late.
+	_publish_accessibility_tree_debounced()
 
 
 func _on_shader_selection_changed(payload: String) -> void:
@@ -1544,6 +1587,9 @@ func _build_floor_plan() -> void:
 	if floor.is_empty():
 		push_warning("Floor plan missing from %s." % FLOOR_PLAN_PATH)
 		return
+	# Cache the floor name so the accessibility tree builder can label the
+	# floor:* node correctly (e.g. "First floor").
+	_a11y_floor_name = String(floor.get("name", "1F"))
 
 	var saved_finish_state := _load_floor_finish_state()
 	var saved_home_skin_id := String(saved_finish_state.get("home_skin_id", _active_home_skin_id))
@@ -1608,6 +1654,9 @@ func _build_floor_plan() -> void:
 			_add_opening_marker(opening as Dictionary)
 
 	_populate_objects(floor)
+	# Floor plan is fully built (rooms + walls + pins). Publish the first
+	# accessibility tree so TalkBack has something to traverse.
+	_publish_accessibility_tree_debounced()
 	_home_pivot.rotation_degrees.y = BASE_PLAN_ROTATION_Y
 	if SHADER_PREVIEW_UNLIT_PACK_ENABLED:
 		_apply_unlit_shader_pack(true)
@@ -2942,9 +2991,28 @@ func _confirm_device_state_change(device_id: String, is_on: bool, request_token:
 	_update_device_pin_visual(device_id)
 	_notify_light_status()
 	_notify_temperature_status()
+	# Device label changed (on/off, temp). Republish so TalkBack reads the new
+	# state next time focus lands on this device, and announce immediately so
+	# users hear the change even if focus is elsewhere.
+	_publish_accessibility_tree_debounced()
+	_announce_for_accessibility(_describe_device_state_change(device, is_on))
 	var pin: Variant = _device_pin_instance(device)
 	if pin != null and pin.has_method("play_confirm_pulse"):
 		pin.call("play_confirm_pulse")
+
+
+func _describe_device_state_change(device: Dictionary, is_on: bool) -> String:
+	var name := String(device.get("name", "Device"))
+	var kind := String(device.get("kind", ""))
+	match kind:
+		"air_conditioner":
+			return "%s turned %s" % [name, "on" if is_on else "off"]
+		"air_purifier":
+			return "%s %s" % [name, "running" if is_on else "stopped"]
+		"camera":
+			return "%s %s" % [name, "live" if is_on else "off"]
+		_:
+			return "%s turned %s" % [name, "on" if is_on else "off"]
 
 
 func _toggle_device_pin(device_id: String) -> void:
@@ -3274,6 +3342,7 @@ func set_device_state(device_id: String, is_on: bool) -> void:
 	_update_device_pin_visual(device_id)
 	_notify_light_status()
 	_notify_temperature_status()
+	_publish_accessibility_tree_debounced()
 
 
 func set_device_states(payload: String) -> void:
@@ -3945,6 +4014,171 @@ func _show_device_control_popup(device_id: String) -> bool:
 		int(device.get("temperature_c", 0))
 	)
 	return true
+
+
+# ---------------------------------------------------------------------------
+# Accessibility (TalkBack) — see scripts/accessibility_tree_builder.gd and
+# android-app/.../accessibility/* for the full data flow. We expose the floor
+# → room → device hierarchy as virtual TalkBack nodes; swiping right walks
+# them in DFS order (app → floor → room1 → devices in room1 → room2 → …).
+# ---------------------------------------------------------------------------
+
+# Triggered every _process tick. Compares camera origin / basis and pivot
+# Y-rotation against the last published snapshot; if any moved beyond a tiny
+# epsilon, schedule a debounced republish so TalkBack focus rectangles stay
+# aligned with the visual pin / room positions during pan, pinch and twist.
+func _check_accessibility_camera_dirty() -> void:
+	if not _a11y_initial_publish_done:
+		return
+	if not is_instance_valid(_camera) or not is_instance_valid(_home_pivot):
+		return
+	var camera_origin := _camera.global_transform.origin
+	var camera_basis_x := _camera.global_transform.basis.x
+	var pivot_rot_y := _home_pivot.rotation.y
+	if (
+		camera_origin.distance_squared_to(_a11y_last_camera_origin) > 0.000004
+		or camera_basis_x.distance_squared_to(_a11y_last_camera_basis_x) > 0.000004
+		or absf(pivot_rot_y - _a11y_last_pivot_rotation_y) > 0.002
+		or absf(_zoom_scale - _a11y_last_zoom_scale) > 0.002
+	):
+		_publish_accessibility_tree_debounced()
+
+
+func _publish_accessibility_tree_debounced() -> void:
+	# Coalesce bursts of state changes (e.g. building 30 device pins in a
+	# single frame) into a single tree publish. 200 ms is conservative
+	# enough that ExploreByTouchHelper's invalidateRoot() doesn't churn
+	# every frame during the intro animation or pinch-zoom — frequent
+	# republishes can briefly hide the overlay's accessibility nodes from
+	# TalkBack while the helper rebuilds, which is what the
+	# "can't navigate to anything" symptom looks like.
+	if _a11y_publish_timer != null:
+		# Existing timer will fire shortly — let it.
+		return
+	if get_tree() == null:
+		return
+	_a11y_publish_timer = get_tree().create_timer(0.2)
+	_a11y_publish_timer.timeout.connect(_publish_accessibility_tree, CONNECT_ONE_SHOT)
+
+
+func _publish_accessibility_tree() -> void:
+	_a11y_publish_timer = null
+	var plugin = _plugin_singleton()
+	if plugin == null or not _plugin_has_java_method(plugin, JAVA_METHOD_PUBLISH_ACCESSIBILITY_TREE):
+		return
+	if _room_entries.is_empty():
+		# Nothing to publish yet; first publish will happen once rooms exist.
+		return
+	var floor_name := _a11y_floor_name
+	if floor_name.is_empty():
+		floor_name = "1F"  # JSON contains exactly one floor today.
+	var tree := AccessibilityTreeBuilder.build(
+		_room_entries,
+		_device_pins,
+		_device_pin_order,
+		floor_name,
+		_camera,
+		get_viewport(),
+	)
+	var dfs_order: Array = tree.get("dfs_order", []) as Array
+	# Defensive: never publish a tree that would empty the host. If the
+	# builder somehow produces no nodes (e.g. transient camera state), keep
+	# the helper's previous tree alive so TalkBack can still navigate.
+	if dfs_order.size() < 2:
+		print("[SmartHome] a11y publish skipped — only %d nodes in tree" % dfs_order.size())
+		return
+	plugin.call(JAVA_METHOD_PUBLISH_ACCESSIBILITY_TREE, JSON.stringify(tree))
+	# Trace which nodes went out so we can diagnose missing-tree symptoms
+	# from logcat without re-deploying.
+	print("[SmartHome] a11y publish: %d nodes (root=%s)" % [dfs_order.size(), String(tree.get("root_id", ""))])
+	_a11y_initial_publish_done = true
+	# Snapshot transforms so the per-frame dirty check only triggers on real
+	# subsequent moves.
+	if is_instance_valid(_camera):
+		_a11y_last_camera_origin = _camera.global_transform.origin
+		_a11y_last_camera_basis_x = _camera.global_transform.basis.x
+	if is_instance_valid(_home_pivot):
+		_a11y_last_pivot_rotation_y = _home_pivot.rotation.y
+	_a11y_last_zoom_scale = _zoom_scale
+
+
+func _announce_for_accessibility(text: String) -> void:
+	if text.is_empty():
+		return
+	var plugin = _plugin_singleton()
+	if plugin == null or not _plugin_has_java_method(plugin, JAVA_METHOD_ANNOUNCE_FOR_ACCESSIBILITY):
+		return
+	plugin.call(JAVA_METHOD_ANNOUNCE_FOR_ACCESSIBILITY, text)
+
+
+# Parses a node id of the form "device:<uuid>" / "room:<uuid>" / "floor:<name>"
+# / "app". Returns ["", ""] for unrecognised input.
+static func _parse_accessibility_node_id(node_id: String) -> Array:
+	var sep := node_id.find(":")
+	if sep < 0:
+		return [node_id, ""]
+	return [node_id.substr(0, sep), node_id.substr(sep + 1)]
+
+
+func _on_accessibility_focus_changed(node_id: String) -> void:
+	if node_id == _a11y_focused_node_id:
+		return
+	_a11y_focused_node_id = node_id
+	var parts := _parse_accessibility_node_id(node_id)
+	var kind: String = parts[0]
+	var raw_id: String = parts[1]
+	# IMPORTANT: focus changes must NOT open the device popup (that's reserved
+	# for activation = TalkBack double-tap). We only mirror the focus visually
+	# so the sighted user / accessibility tester can see what TalkBack reads.
+	match kind:
+		"device":
+			# Reuse the existing per-pin highlight if the API exists; falling
+			# back to a no-op keeps focus traversal working even when shaders
+			# aren't ready yet (e.g. during the intro animation).
+			var device := _device_pins.get(raw_id, {}) as Dictionary
+			if device.is_empty():
+				return
+			var pin: Variant = device.get("pin", null)
+			if pin != null and pin.has_method("set_accessibility_focus"):
+				pin.call("set_accessibility_focus", true)
+		"room":
+			# No room-level highlight wired today; placeholder for future
+			# spotlight / outline. Tap-style zoom would be too disruptive on
+			# every swipe-right.
+			pass
+		_:
+			pass
+
+
+func _on_accessibility_activate(node_id: String) -> void:
+	var parts := _parse_accessibility_node_id(node_id)
+	var kind: String = parts[0]
+	var raw_id: String = parts[1]
+	match kind:
+		"device":
+			# Direct on/off toggle — bypasses the visual control popup so
+			# the user gets a single, predictable "double tap to activate"
+			# / "double tap to deactivate" interaction. Confirmation
+			# announcement comes from _confirm_device_state_change.
+			_toggle_device_pin(raw_id)
+		"room":
+			# Zoom the camera into the activated room so the visual state
+			# matches what TalkBack just announced. The camera move will
+			# trigger _check_accessibility_camera_dirty → republish, which
+			# refreshes pin bounds for the new view.
+			var room_entry := _rooms_by_id.get(raw_id, {}) as Dictionary
+			if not room_entry.is_empty():
+				_announce_for_accessibility(
+					"%s zoomed in" % String(room_entry.get("label", "Room"))
+				)
+				_zoom_to_room(room_entry)
+		"floor", "app":
+			# Reset to the overview shot so the user can re-orient. Same
+			# behaviour as a double-tap on empty floor area.
+			_announce_for_accessibility("Overview")
+			_zoom_to_full_view()
+		_:
+			pass
 
 
 func _set_selected_air_quality_device(device_id: String) -> void:

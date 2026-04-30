@@ -75,6 +75,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -159,6 +162,7 @@ class MainActivity : AppCompatActivity(), GodotHost, ShaderHostPlugin.ActivityBr
 
     private var godotFragment: GodotFragment? = null
     private var shaderHostPlugin: ShaderHostPlugin? = null
+    private var accessibilityOverlay: com.smartthings.shaderhome.accessibility.AccessibilityOverlayView? = null
     private val isCatalogExpanded = mutableStateOf(false)
     private val selectedFurnitureModel = mutableStateOf<String?>(null)
     private val lightFocusActive = mutableStateOf(false)
@@ -294,6 +298,34 @@ class MainActivity : AppCompatActivity(), GodotHost, ShaderHostPlugin.ActivityBr
                 .commitNowAllowingStateLoss()
         }
         godot?.let { initPluginIfNeeded(it) }
+        bindAccessibilityOverlay()
+    }
+
+    /**
+     * Wire the transparent accessibility overlay (declared in
+     * res/layout/activity_main.xml) to forward TalkBack focus / activate
+     * events back to the Godot side via the plugin.
+     *
+     * Touch events pass through the overlay (see AccessibilityOverlayView),
+     * so existing pan / pinch / twist gestures on the GodotFragment are
+     * unaffected. The overlay starts empty; Godot publishes a tree shortly
+     * after _ready() runs.
+     */
+    private fun bindAccessibilityOverlay() {
+        if (accessibilityOverlay != null) return
+        val overlay = findViewById<com.smartthings.shaderhome.accessibility.AccessibilityOverlayView>(
+            R.id.accessibility_overlay,
+        ) ?: return
+        accessibilityOverlay = overlay
+        overlay.setListener(object : com.smartthings.shaderhome.accessibility.AccessibilityOverlayView.Listener {
+            override fun onAccessibilityFocusChanged(nodeId: String) {
+                shaderHostPlugin?.notifyAccessibilityFocus(nodeId)
+            }
+
+            override fun onAccessibilityActivate(nodeId: String) {
+                shaderHostPlugin?.notifyAccessibilityActivate(nodeId)
+            }
+        })
     }
 
     private fun emitShaderSelection(shaderIds: List<String>) {
@@ -794,6 +826,21 @@ class MainActivity : AppCompatActivity(), GodotHost, ShaderHostPlugin.ActivityBr
         )
     }
 
+    /**
+     * Godot pushed a new accessibility tree (debounced ~50 ms). Parsing runs
+     * on the UI thread because [AccessibilityOverlayView.updateTree] mutates
+     * view state and TalkBack queries the helper from the UI thread.
+     */
+    override fun onAccessibilityTreeUpdated(json: String) {
+        val overlay = accessibilityOverlay ?: return
+        val tree = com.smartthings.shaderhome.accessibility.AccessibilityTree.fromJson(json)
+        overlay.updateTree(tree)
+    }
+
+    override fun onAccessibilityAnnounce(text: String) {
+        accessibilityOverlay?.announce(text)
+    }
+
     override fun getActivity() = this
 
     override fun getGodot() = godotFragment?.godot
@@ -918,6 +965,7 @@ private fun FloatingControls(
             FloatingIconButton(
                 icon = Icons.Rounded.OpenWith,
                 onClick = {},
+                contentDescription = "Move floor plan",
             )
         } else if (enabled) {
             FloatingCircleButton(
@@ -925,10 +973,17 @@ private fun FloatingControls(
                 onClick = {
                     onToggle3d(!is3dMode)
                 },
+                // State-aware label so TalkBack reads what the next tap
+                // will do, not what the glyph currently shows.
+                contentDescription = if (is3dMode)
+                    "Switch to 2D view"
+                else
+                    "Switch to 3D view",
             )
             FloatingIconButton(
                 icon = Icons.AutoMirrored.Rounded.RotateRight,
                 onClick = onRotate,
+                contentDescription = "Rotate floor",
             )
         }
     }
@@ -1163,10 +1218,15 @@ private fun InteriorCatalogBottomSheet(
             FloatingCircleButton(
                 label = if (is3dMode) "3D" else "2D",
                 onClick = { onToggle3d(!is3dMode) },
+                contentDescription = if (is3dMode)
+                    "Switch to 2D view"
+                else
+                    "Switch to 3D view",
             )
             FloatingIconButton(
                 icon = Icons.AutoMirrored.Rounded.RotateRight,
                 onClick = onRotate,
+                contentDescription = "Rotate floor",
             )
         }
 
@@ -2172,25 +2232,48 @@ private fun DeviceControlDialog(
 private fun FloatingCircleButton(
     label: String,
     onClick: () -> Unit,
+    contentDescription: String? = null,
 ) {
     val colorScheme = MaterialTheme.colorScheme
 
-    Surface(
-        onClick = onClick,
-        color = colorScheme.surfaceVariant,
-        shape = CircleShape,
-    ) {
-        Box(
-            modifier = Modifier.size(54.dp),
-            contentAlignment = Alignment.Center,
-        ) {
-            Text(
-                text = label,
-                color = colorScheme.onSurface,
-                style = MaterialTheme.typography.labelLarge,
-                textAlign = TextAlign.Center,
+    // We can't use Surface(onClick=...) here because Compose registers its
+    // click action on a separate semantic layer from the user-supplied
+    // modifier, which prevents TalkBack from announcing
+    // "<contentDescription>, Double tap to activate" as one focusable
+    // node. Rebuilding with an explicit Modifier.clickable + semantics on
+    // the SAME Box guarantees both live on one merged accessibility node.
+    Box(
+        modifier = Modifier
+            .size(54.dp)
+            .clip(CircleShape)
+            .background(colorScheme.surfaceVariant)
+            // Semantics MUST come before clickable: Compose creates the
+            // semantic boundary at the first semantics-producing modifier
+            // in the chain, and clickable produces its own boundary. By
+            // putting semantics(mergeDescendants=true) first, the outer
+            // boundary owns both the contentDescription and (via merge)
+            // the click action that clickable adds below it.
+            .then(
+                if (contentDescription != null) {
+                    Modifier.semantics(mergeDescendants = true) {
+                        this.contentDescription = contentDescription
+                    }
+                } else Modifier
             )
-        }
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = label,
+            color = colorScheme.onSurface,
+            style = MaterialTheme.typography.labelLarge,
+            textAlign = TextAlign.Center,
+            // Suppress the visible glyph's standalone semantics so the
+            // merge above is the only focusable node.
+            modifier = if (contentDescription != null)
+                Modifier.clearAndSetSemantics {}
+            else Modifier,
+        )
     }
 }
 
@@ -2198,13 +2281,26 @@ private fun FloatingCircleButton(
 private fun FloatingIconButton(
     icon: ImageVector,
     onClick: () -> Unit,
+    contentDescription: String? = null,
 ) {
     val colorScheme = MaterialTheme.colorScheme
+
+    // See FloatingCircleButton — mergeDescendants pulls the Surface's
+    // onClick action and the inner Icon's contentDescription up into one
+    // focusable accessibility node.
+    val semanticsModifier = if (contentDescription != null) {
+        Modifier.semantics(mergeDescendants = true) {
+            this.contentDescription = contentDescription
+        }
+    } else {
+        Modifier
+    }
 
     Surface(
         onClick = onClick,
         color = colorScheme.surfaceVariant,
         shape = CircleShape,
+        modifier = semanticsModifier,
     ) {
         Box(
             modifier = Modifier.size(54.dp),
@@ -2212,7 +2308,7 @@ private fun FloatingIconButton(
         ) {
             Icon(
                 imageVector = icon,
-                contentDescription = null,
+                contentDescription = null, // merged from parent semantics
                 tint = colorScheme.onSurface,
                 modifier = Modifier.size(24.dp),
             )
