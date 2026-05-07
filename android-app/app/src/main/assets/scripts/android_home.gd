@@ -4,6 +4,7 @@ const DEVICE_PIN_SCENE := preload("res://scenes/device_pin.tscn")
 const DUST_PUFF_DRAMATIC_SCENE := preload("res://scenes/vfx/dust_puff_dramatic.tscn")
 const DUST_PUFF_SCENE := preload("res://scenes/vfx/dust_puff.tscn")
 const SHADER_WALL_MATERIAL_UNLIT := preload("res://shaders/wall_material_unlit.gdshader")
+const SHADER_WALL_MATERIAL_DITHER_UNLIT := preload("res://shaders/wall_material_dither_unlit.gdshader")
 const SHADER_FLOOR_MATERIAL_UNLIT := preload("res://shaders/floor_material_unlit.gdshader")
 const SHADER_FURNITURE_DUAL_TONE_UNLIT := preload("res://shaders/furniture_dual_tone_unlit.gdshader")
 # Flip to false to restore the default lit pipeline. On-device preview flag.
@@ -1881,7 +1882,8 @@ func _emit_wall_segment(from: Vector2, to: Vector2, t0: float, t1: float, wall_h
 		true
 	)
 	var tint := _wall_tint_for_room_ids(room_ids, is_exterior)
-	wall_instance.material_override = _make_wall_material(is_exterior, tint)
+	var mat_solid := _make_wall_material(is_exterior, tint)
+	wall_instance.material_override = mat_solid
 	_home_pivot.add_child(wall_instance)
 	_wall_nodes.append(wall_instance)
 	_wall_tint_entries.append({
@@ -1897,6 +1899,7 @@ func _emit_wall_segment(from: Vector2, to: Vector2, t0: float, t1: float, wall_h
 			perp = perp.normalized()
 			if perp.dot(midpoint) < 0.0:
 				perp = -perp
+		var mat_dither := _make_wall_material_dither(is_exterior, tint)
 		_exterior_wall_records.append({
 			"mesh": wall_instance,
 			"box": mesh,
@@ -1904,6 +1907,8 @@ func _emit_wall_segment(from: Vector2, to: Vector2, t0: float, t1: float, wall_h
 			"length": length,
 			"base_height": wall_height,
 			"midpoint": midpoint,
+			"mat_solid": mat_solid,
+			"mat_dither": mat_dither,
 		})
 
 
@@ -4641,6 +4646,23 @@ func _make_wall_material(is_exterior: bool, tint: Color = Color(0.96, 0.96, 0.97
 	return material
 
 
+func _make_wall_material_dither(is_exterior: bool, tint: Color = Color(0.96, 0.96, 0.97)) -> ShaderMaterial:
+	var material := ShaderMaterial.new()
+	material.shader = SHADER_WALL_MATERIAL_DITHER_UNLIT
+	var base := EXTERIOR_WALL_COLOR if is_exterior else Color(tint.r, tint.g, tint.b, 1.0)
+	material.set_shader_parameter("base_color", base)
+	material.set_shader_parameter("accent_color", base.darkened(0.12))
+	material.set_shader_parameter("accent_mix", 0.30)
+	material.set_shader_parameter("tone_bias", 0.45)
+	material.set_shader_parameter("vertical_gradient", 0.20)
+	material.set_shader_parameter("ambient_darken", 0.15)
+	material.set_shader_parameter("opacity", 0.55)
+	material.set_shader_parameter("dither_mode", 1)
+	material.set_meta("pill_focus_wall", true)
+	material.set_meta("pill_focus_wall_exterior", is_exterior)
+	return material
+
+
 func _wall_tint_for_room_ids(room_ids: Array, is_exterior: bool) -> Color:
 	var accum := Color(0.0, 0.0, 0.0, 0.0)
 	var count := 0
@@ -5708,7 +5730,7 @@ func _update_front_wall_cutaway() -> void:
 	var cam_local: Vector3 = inverse * _camera.global_position
 	var cam_xz := Vector2(cam_local.x, cam_local.z)
 	if cam_xz.length() <= 0.0001:
-		_reset_exterior_wall_heights()
+		_reset_exterior_wall_transparency()
 		return
 	var cam_dir := cam_xz.normalized()
 	var best_score := -INF
@@ -5723,17 +5745,24 @@ func _update_front_wall_cutaway() -> void:
 		var base_height := float(record.get("base_height", EXTERIOR_WALL_HEIGHT))
 		var length := float(record.get("length", 1.0))
 		var score := (record.get("outward", Vector2.ZERO) as Vector2).dot(cam_dir)
-		var height := FRONT_WALL_CUTAWAY_HEIGHT if score >= cutaway_threshold else base_height
+		var want_dither := score >= cutaway_threshold
+		var target_mat: Material = record.get("mat_dither", null) if want_dither else record.get("mat_solid", null)
+		if target_mat != null and mesh.material_override != target_mat:
+			mesh.material_override = target_mat
+		var height := FRONT_WALL_CUTAWAY_HEIGHT if want_dither else base_height
 		box.size = Vector3(WALL_THICKNESS, height, length)
 		mesh.position.y = height * 0.5
 
 
-func _reset_exterior_wall_heights() -> void:
+func _reset_exterior_wall_transparency() -> void:
 	for record in _exterior_wall_records:
 		var mesh := record.get("mesh", null) as MeshInstance3D
 		var box := record.get("box", null) as BoxMesh
 		if not is_instance_valid(mesh) or box == null:
 			continue
+		var solid: Material = record.get("mat_solid", null)
+		if solid != null and mesh.material_override != solid:
+			mesh.material_override = solid
 		var base_height := float(record.get("base_height", EXTERIOR_WALL_HEIGHT))
 		var length := float(record.get("length", 1.0))
 		box.size = Vector3(WALL_THICKNESS, base_height, length)
@@ -5775,7 +5804,7 @@ func _update_camera_for_viewport() -> void:
 		_camera.position = edit_focus_world + Vector3(0.0, max_dimension * 2.2, 0.0)
 		_camera.look_at(edit_focus_world, Vector3.BACK)
 		_base_camera_size = _required_ortho_size(viewport_size, 1.12)
-		_reset_exterior_wall_heights()
+		_reset_exterior_wall_transparency()
 	elif _is_3d_view:
 		var focus_world := _plan_focus_world()
 		_camera.projection = Camera3D.PROJECTION_PERSPECTIVE
@@ -5807,7 +5836,7 @@ func _update_camera_for_viewport() -> void:
 			_camera.position = focus_world + Vector3(0.0, max_dimension * SOFT_2D_LANDSCAPE_HEIGHT, SOFT_2D_LOOK_OFFSET_Z)
 		_camera.look_at(focus_world + Vector3(0.0, SOFT_2D_FOCUS_LIFT, SOFT_2D_LOOK_OFFSET_Z), Vector3.BACK)
 		_base_camera_size = _required_ortho_size(viewport_size, VIEW_PADDING_2D)
-		_reset_exterior_wall_heights()
+		_reset_exterior_wall_transparency()
 	_apply_camera_zoom_for_view_mode()
 
 

@@ -7,6 +7,7 @@ const AC_PIN_WAVE_SHADER := preload("res://shaders/device_ac_pin_wave.gdshader")
 const LIGHT_GLOW_SHADER := preload("res://shaders/device_light_glow.gdshader")
 const LIGHT_CLOUD_SHADER := preload("res://shaders/device_light_cloud.gdshader")
 const TEMPERATURE_WASH_SHADER := preload("res://shaders/device_temperature_wash.gdshader")
+const PIN_ICON_DITHER_SHADER := preload("res://shaders/pin_icon_dither.gdshader")
 const DEVICE_KIND_LIGHT := "light"
 const DEVICE_KIND_AIR_CONDITIONER := "air_conditioner"
 const DEVICE_KIND_AIR_PURIFIER := "air_purifier"
@@ -299,6 +300,11 @@ func _configure_visual_nodes() -> void:
 	_icon_base.no_depth_test = true
 	_icon_base.render_priority = 20
 	_icon_base.scale = Vector3(1.0, PIN_HEIGHT_SCALE, 1.0)
+	var dither_mat := ShaderMaterial.new()
+	dither_mat.shader = PIN_ICON_DITHER_SHADER
+	dither_mat.set_shader_parameter("opacity", 0.8)
+	dither_mat.set_shader_parameter("alpha_cut", 0.01)
+	_icon_base.material_override = dither_mat
 
 	_configure_billboard_quad(_progress_border, SPINNER_WORLD_SIZE, 22)
 	_configure_billboard_quad(_progress, SPINNER_WORLD_SIZE, 23)
@@ -417,6 +423,9 @@ func _build_base_viewport() -> void:
 	root.add_child(_icon_rect)
 
 	_icon_base.texture = _base_viewport.get_texture()
+	var dither_mat := _icon_base.material_override as ShaderMaterial
+	if dither_mat != null:
+		dither_mat.set_shader_parameter("source_tex", _base_viewport.get_texture())
 
 
 func _build_spinner_viewports() -> void:
