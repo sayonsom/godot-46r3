@@ -6,6 +6,7 @@ const DUST_PUFF_SCENE := preload("res://scenes/vfx/dust_puff.tscn")
 const SHADER_WALL_MATERIAL_UNLIT := preload("res://shaders/wall_material_unlit.gdshader")
 const SHADER_FLOOR_MATERIAL_UNLIT := preload("res://shaders/floor_material_unlit.gdshader")
 const SHADER_FURNITURE_DUAL_TONE_UNLIT := preload("res://shaders/furniture_dual_tone_unlit.gdshader")
+const SHADER_FURNITURE_TWO_TONE_SHADOW := preload("res://shaders/furniture_two_tone_shadow.gdshader")
 # Flip to false to restore the default lit pipeline. On-device preview flag.
 const SHADER_PREVIEW_UNLIT_PACK_ENABLED := false
 const FLOOR_PLAN_PATH := "res://data/sample_floor_plan.json"
@@ -33,7 +34,7 @@ const MARKER_HEIGHT := 0.055
 const BASE_PLAN_ROTATION_Y := 0.0
 const SMARTTHINGS_CAMERA_PITCH_DEG := 30.0
 const SMARTTHINGS_CAMERA_DISTANCE_SCALE := 1.0
-const ZOOM_3D_MIN_SCALE := 0.48
+const ZOOM_3D_MIN_SCALE := 0.22
 const ZOOM_3D_MAX_SCALE := 1.0
 const ZOOM_OUT_OVERSCROLL_RANGE_FRACTION := 0.15
 const ZOOM_SPRING_STIFFNESS := 26.0
@@ -188,30 +189,58 @@ const MODEL_KIND_CABINET := "cabinet"
 const MODEL_KIND_TABLE := "table"
 const MODEL_KIND_STEP_STOOL := "step_stool"
 const MODEL_KIND_SEAT := "seat"
+const MODEL_KIND_SOFA := "sofa"
+# Sofa-only catalog. The sample app intentionally ships with just these five
+# GLBs (sofa_1..sofa_5) so the two-tone shadow shader has a consistent set of
+# silhouettes to demonstrate the SmartThings VI guideline aesthetic. Each
+# sofa is rendered with the room's floor colour fed straight into the shader.
+const SOFA_VARIANT_IDS := [
+	"sofa_1",
+	"sofa_2",
+	"sofa_3",
+	"sofa_4",
+	"sofa_5",
+]
 const LEGACY_MODEL_DEFINITIONS := [
 	{
-		"id": "cabinet",
-		"asset_path": "res://GLB/cabinet.glb",
-		"kind": MODEL_KIND_CABINET,
-		"base_scale": 1.15,
-		"floor_offset": -0.008,
-		"shadow_footprint": Vector2(2.75, 2.18),
+		"id": "sofa_1",
+		"asset_path": "res://GLB/sofas/sofa_1.glb",
+		"kind": MODEL_KIND_SOFA,
+		"base_scale": 1.0,
+		"floor_offset": 0.0,
+		"shadow_footprint": Vector2(2.6, 1.9),
 	},
 	{
-		"id": "small_table",
-		"asset_path": "res://GLB/small_table.glb",
-		"kind": MODEL_KIND_TABLE,
-		"base_scale": 0.98,
-		"floor_offset": -0.016,
-		"shadow_footprint": Vector2(4.1, 3.4),
+		"id": "sofa_2",
+		"asset_path": "res://GLB/sofas/sofa_2.glb",
+		"kind": MODEL_KIND_SOFA,
+		"base_scale": 1.0,
+		"floor_offset": 0.0,
+		"shadow_footprint": Vector2(2.6, 1.9),
 	},
 	{
-		"id": "step_stool",
-		"asset_path": "res://GLB/step_stool.glb",
-		"kind": MODEL_KIND_STEP_STOOL,
-		"base_scale": 0.94,
-		"floor_offset": -0.022,
-		"shadow_footprint": Vector2(2.0, 1.7),
+		"id": "sofa_3",
+		"asset_path": "res://GLB/sofas/sofa_3.glb",
+		"kind": MODEL_KIND_SOFA,
+		"base_scale": 1.0,
+		"floor_offset": 0.0,
+		"shadow_footprint": Vector2(2.6, 1.9),
+	},
+	{
+		"id": "sofa_4",
+		"asset_path": "res://GLB/sofas/sofa_4.glb",
+		"kind": MODEL_KIND_SOFA,
+		"base_scale": 1.0,
+		"floor_offset": 0.0,
+		"shadow_footprint": Vector2(2.6, 1.9),
+	},
+	{
+		"id": "sofa_5",
+		"asset_path": "res://GLB/sofas/sofa_5.glb",
+		"kind": MODEL_KIND_SOFA,
+		"base_scale": 1.0,
+		"floor_offset": 0.0,
+		"shadow_footprint": Vector2(2.6, 1.9),
 	},
 ]
 
@@ -727,26 +756,15 @@ func _configure_furniture_catalog() -> void:
 		_register_furniture_model(
 			String(definition.get("id", "")),
 			String(definition.get("asset_path", "")),
-			String(definition.get("kind", MODEL_KIND_TABLE)),
+			String(definition.get("kind", MODEL_KIND_SOFA)),
 			float(definition.get("base_scale", 1.0)),
 			float(definition.get("floor_offset", 0.0)),
 			definition.get("shadow_footprint", Vector2(CONTACT_SHADOW_SCALE, CONTACT_SHADOW_SCALE)) as Vector2
 		)
 
-	for item in _load_ikea_furniture_manifest_items():
-		var model_id := String(item.get("slug", "")).strip_edges()
-		var output_file := String(item.get("output_file", "")).strip_edges()
-		if model_id.is_empty() or output_file.is_empty() or not output_file.ends_with(".glb"):
-			continue
-		var kind := _furniture_model_kind(model_id, String(item.get("product_name", "")))
-		_register_furniture_model(
-			model_id,
-			"res://%s" % output_file,
-			kind,
-			_default_model_scale_for_kind(kind),
-			_default_model_floor_offset_for_kind(kind),
-			_default_model_shadow_footprint_for_kind(kind)
-		)
+	# Sample app deliberately uses only the sofa GLB set, so the IKEA
+	# manifest is no longer ingested. Re-enable the loop below if a richer
+	# catalog is ever needed.
 
 	print("[SmartHome] Furniture catalog configured with %d models" % _model_paths.size())
 
@@ -822,6 +840,8 @@ func _default_model_shadow_footprint_for_kind(kind: String) -> Vector2:
 			return Vector2(1.26, 1.14)
 		MODEL_KIND_SEAT:
 			return Vector2(1.08, 1.04)
+		MODEL_KIND_SOFA:
+			return Vector2(1.34, 1.10)
 		_:
 			return Vector2(CONTACT_SHADOW_SCALE, CONTACT_SHADOW_SCALE)
 
@@ -2011,7 +2031,8 @@ func _populate_objects(floor: Dictionary) -> void:
 		var rotation_data: Array = coordinates.get("rotation", [])
 		if rotation_data is Array and rotation_data.size() >= 2:
 			rotation_y = float(rotation_data[1])
-		var room_color := room_entry.get("display_color", Color(0.9, 0.9, 0.9)) as Color
+		var active_finish_id := String(room_entry.get("finish_id", _default_finish_for_room(room_entry)))
+		var room_color := _resolve_room_floor_color(room_entry, active_finish_id)
 		if is_instance_valid(_add_furniture_instance(model_id, position_2d, rotation_y, room_color, room_id)):
 			placed_per_room[room_id] = int(placed_per_room.get(room_id, 0)) + 1
 
@@ -2061,6 +2082,7 @@ func _create_furniture_root(
 	root.set_meta("furniture_scale_factor", 1.0)
 	root.set_meta("furniture_room_color", room_color)
 	root.set_meta("furniture_is_preview", is_preview)
+	_apply_two_tone_shadow_to_furniture(root, room_color, is_preview)
 	root.set_meta("furniture_local_aabb", grounded_aabb)
 	root.set_meta("furniture_footprint_local", _footprint_polygon_from_aabb(grounded_aabb))
 	root.set_meta(
@@ -4207,17 +4229,29 @@ func get_device_ids() -> PackedStringArray:
 
 
 func _model_for_category(category: String) -> String:
+	# Sofa-only catalog: every category maps to a sofa variant. Different
+	# categories deterministically pick different sofa silhouettes so the
+	# sample home shows visual variety without random churn between runs.
+	var fallback := SOFA_VARIANT_IDS[0] as String
 	match category:
 		"BEDROOM":
-			return _default_model_id_for_kind(MODEL_KIND_BED, _default_model_id_for_kind(MODEL_KIND_TABLE, "small_table"))
+			return _sofa_variant_or_fallback(SOFA_VARIANT_IDS[1], fallback)
 		"CLOSET":
-			return _default_model_id_for_kind(MODEL_KIND_CABINET, "cabinet")
+			return _sofa_variant_or_fallback(SOFA_VARIANT_IDS[2], fallback)
 		"KITCHEN":
-			return _default_model_id_for_kind(MODEL_KIND_TABLE, "small_table")
+			return _sofa_variant_or_fallback(SOFA_VARIANT_IDS[3], fallback)
 		"BATHROOM":
-			return _default_model_id_for_kind(MODEL_KIND_STEP_STOOL, "step_stool")
+			return _sofa_variant_or_fallback(SOFA_VARIANT_IDS[4], fallback)
 		_:
-			return _default_model_id_for_kind(MODEL_KIND_TABLE, "small_table")
+			return _sofa_variant_or_fallback(SOFA_VARIANT_IDS[0], fallback)
+
+
+func _sofa_variant_or_fallback(preferred: String, fallback: String) -> String:
+	if _model_paths.has(preferred):
+		return preferred
+	if _model_paths.has(fallback):
+		return fallback
+	return _default_model_id_for_kind(MODEL_KIND_SOFA, fallback)
 
 
 func _find_room_entry(point: Vector2) -> Dictionary:
@@ -4583,6 +4617,21 @@ func _render_room_finish(room_entry: Dictionary, finish_id: String) -> void:
 		floor_node.material_override = _floor_finish_material(finish_id)
 	_sync_focus_material_entry(floor_node)
 	_refresh_wall_tints()
+	_refresh_two_tone_shadow_for_room(
+		String(room_entry.get("id", "")),
+		_resolve_room_floor_color(room_entry, finish_id)
+	)
+
+
+func _resolve_room_floor_color(room_entry: Dictionary, finish_id: String) -> Color:
+	if finish_id == "_room_default":
+		return room_entry.get("display_color", Color(0.9, 0.9, 0.9)) as Color
+	var finish := FLOOR_FINISHES.get(finish_id, {}) as Dictionary
+	if finish.has("solid_color"):
+		return finish.get("solid_color") as Color
+	if finish.has("swatch_color"):
+		return finish.get("swatch_color") as Color
+	return room_entry.get("display_color", Color(0.9, 0.9, 0.9)) as Color
 
 
 func _room_default_material(room_color: Color) -> StandardMaterial3D:
@@ -4808,12 +4857,75 @@ func _build_floor_label_decal(text: String, room_color: Color) -> Node3D:
 	return root
 
 
+func _apply_two_tone_shadow_to_furniture(root: Node3D, room_color: Color, is_preview: bool = false) -> void:
+	if not is_instance_valid(root):
+		return
+	var body_overlay: Node = null
+	if root.has_meta("furniture_body_overlay"):
+		body_overlay = root.get_meta("furniture_body_overlay") as Node
+	var floor_color := room_color
+	floor_color.a = 1.0
+	for mesh_instance in _collect_mesh_instances(root):
+		if mesh_instance == body_overlay:
+			continue
+		var material := ShaderMaterial.new()
+		material.shader = SHADER_FURNITURE_TWO_TONE_SHADOW
+		material.set_shader_parameter("floor_color", floor_color)
+		# Light angle is biased so the side facing the camera reads as the
+		# clear lit face and the opposite side reads as the deeper shadow.
+		material.set_shader_parameter("light_direction", Vector3(-0.50, 0.85, 0.55))
+		# Softer terminator + secondary cues so cushion seams, pillow tops,
+		# and rounded corners come through without going back to washed-out.
+		# Tuned to the SmartThings VI reference. Three-tone structure:
+		#   - cushion tops sit at ~floor colour (top_tone_white small, so
+		#     tops don't bleach to white)
+		#   - body lit sits ~14% darker than the floor (body_darken)
+		#   - body shadow drops a further ~42% from there
+		# This keeps cushion definition readable on any floor finish — even
+		# near-white floors — without losing the "same family as the floor"
+		# look. Softness 0.22 = clear cushion-seam lines but still soft.
+		material.set_shader_parameter("body_darken", 0.14)
+		material.set_shader_parameter("shadow_strength", 0.42)
+		material.set_shader_parameter("highlight_strength", 0.04)
+		material.set_shader_parameter("shadow_softness", 0.22)
+		material.set_shader_parameter("top_lift", 0.65)
+		material.set_shader_parameter("top_tone_white", 0.10)
+		material.set_shader_parameter("top_lift_falloff", 0.50)
+		material.set_shader_parameter("rim_strength", 0.06)
+		material.set_shader_parameter("rim_power", 2.8)
+		material.set_shader_parameter("ground_shadow_lift", 0.14)
+		material.set_shader_parameter("alpha", 0.62 if is_preview else 1.0)
+		material.set_shader_parameter("alpha_clip", 0.05)
+		mesh_instance.material_override = material
+		mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+
+
+func _refresh_two_tone_shadow_for_room(room_id: String, room_color: Color) -> void:
+	if room_id.is_empty():
+		return
+	for root in _furniture_roots:
+		if not is_instance_valid(root):
+			continue
+		if String(root.get_meta("furniture_room_id", "")) != room_id:
+			continue
+		var is_preview := bool(root.get_meta("furniture_is_preview", false))
+		root.set_meta("furniture_room_color", room_color)
+		_apply_two_tone_shadow_to_furniture(root, room_color, is_preview)
+
+
 func _style_furniture_node(node: Node, room_color: Color, is_preview: bool = false, state: String = "normal") -> void:
 	if node is MeshInstance3D:
 		var mesh_instance := node as MeshInstance3D
 		mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		mesh_instance.transparency = 0.62 if is_preview else FURNITURE_TRANSPARENCY
-		mesh_instance.material_overlay = _make_furniture_overlay(room_color, is_preview, state)
+		# Only layer the brightening/selection-tint overlay for selection
+		# states. In normal state, leave the two-tone shadow shader output
+		# untouched so the silhouette stays crisp.
+		var keeps_overlay := state == "selected" or state == "invalid_selected" or state == "preview_invalid"
+		if keeps_overlay:
+			mesh_instance.material_overlay = _make_furniture_overlay(room_color, is_preview, state)
+		else:
+			mesh_instance.material_overlay = null
 	for child in node.get_children():
 		_style_furniture_node(child, room_color, is_preview, state)
 
